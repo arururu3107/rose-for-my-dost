@@ -848,175 +848,175 @@
     </button>
   </div>
 
-  <!-- SCREEN 5: COUNTDOWN -->
+<!-- SCREEN 5: COUNTDOWN -->
+
   <div class="screen hidden" id="screen5">
+
     <div class="stamp">⏱️ CRITICAL MOMENT</div>
+
     <h1>SYSTEM OVERRIDE IN</h1>
+
     
+
     <div class="countdown" id="countdown">3</div>
+
     
+
     <p>Prepare for emotional content...</p>
+
   </div>
 
-  <!-- FORM (Hidden) -->
-  <form
-    id="choiceForm"
-    action="https://formspree.io/f/mzdabrwk"
-    method="POST"
-    style="display:none;"
-  >
-    <input type="hidden" name="choice" id="choiceInput">
-  </form>
 
-  <!-- SCREEN 6: ROSE REVEAL -->
-  <div class="screen hidden" id="screen6">
-    <h1>🌹 HAPPY ROSE DAY 🌹</h1>
-    
-    <p style="font-size: 16px; margin: 15px 0; color: #ff3f75;">
-      <strong>✨ Click the rose to bloom it! ✨</strong>
-    </p>
 
-    <div class="rose-container" onclick="openRose()" id="roseContainer">
-      <div class="rose" id="roseFlower">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-      </div>
-      <div class="stem"></div>
-      <div class="leaf left"></div>
-      <div class="leaf right"></div>
+ <!-- SCREEN 6: ROSE REVEAL -->
+<div class="screen hidden" id="screen6">
+  <h1>🌹 HAPPY ROSE DAY 🌹</h1>
+  
+  <p style="font-size: 16px; margin: 15px 0; color: #ff3f75;">
+    <strong>✨ Click the rose to bloom it! ✨</strong>
+  </p>
+
+  <div class="rose-container" onclick="openRose()" id="roseContainer">
+    <div class="rose" id="roseFlower">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
     </div>
-
-    <div id="roseMessage" style="opacity: 0; transition: opacity 1.5s ease;">
-      <div class="love-card">
-        <p style="font-size: 17px; line-height: 1.8;">
-          Last year I had made a website for you so this time I got you a <strong>digital rose</strong>.<br>
-          <span style="font-size: 14px; opacity: 0.8;">(I can send real ones too but not sure you'd accept it rn)</span><br><br>
-          The thing is... my intentions behind this are<br>
-          <span class="pulse-heart" style="font-size: 20px; color: #ff3f75;">
-            <strong>annoyingly, realistically,<br>PURE.</strong>
-          </span>
-        </p>
-      </div>
-    </div>
-
-    <button onclick="goTo(7)" id="continueBtn" style="opacity: 0; transition: opacity 1s ease; margin-top: 20px;">
-      💝 CONTINUE TO MY CONFESSION
-    </button>
+    <div class="stem"></div>
+    <div class="leaf left"></div>
+    <div class="leaf right"></div>
   </div>
 
-  <!-- SCREEN 7: CONFESSION -->
-  <div class="screen hidden" id="screen7">
-    <div class="envelope" onclick="openEnvelope()" id="envelope">
-      <div class="envelope-body"></div>
-      <div class="envelope-flap"></div>
-      <div class="letter"></div>
-    </div>
-    
-    <p style="font-size: 14px; color: #ff5c8a; margin-bottom: 20px;">
-      👆 Open the letter above
-    </p>
-
-    <div id="confessionText" style="opacity: 0; transition: opacity 1s ease;">
-      <h1 style="margin-bottom: 25px;">On a very serious note. 💭</h1>
-      
-      <div class="love-card">
-        <p style="font-size: 16px; line-height: 2;">
-          I know I messed up.<br>
-          I'm not here to explain or defend myself.<br>
-          <br>
-          I just wanted you to know:<br>
-          <strong style="color: #ff3f75; font-size: 22px;">I miss us.</strong><br>
-          <br>
-          The laughs. The dumb conversations. The random calls.<br>
-          The way you make everything feel <em>lighter</em>.<br>
-          <br>
-          This whole dramatic production?<br>
-          <span style="color: #ff5c8a;">
-            It's my way of saying <strong>I care enough to try</strong>.
-          </span>
-        </p>
-      </div>
-
-      <button onclick="goTo(8)" style="margin-top: 25px;">
-        💌 SO... WHAT DO YOU SAY?
-      </button>
-    </div>
-  </div>
-
-  <!-- SCREEN 8: CHOICE -->
-  <div class="screen hidden" id="screen8">
-    <h1>Decision Time 🎯</h1>
-    
-    <p style="margin: 20px 0 30px 0; font-size: 15px; line-height: 1.8;">
-      I know actions speak louder than words.<br>
-      But sometimes words (and overly dramatic web pages)<br>
-      are a <em>pretty good start</em>... right?<br>
-      <span style="font-size: 13px; opacity: 0.7;">...Right? 🥺</span>
-    </p>
-
-    <div class="choice-card" onclick="sendChoice('Forgiven')">
-      <h3 style="color: #ff3f75; margin-bottom: 8px;">✅ Fine. You're forgiven.</h3>
-      <p style="font-size: 13px; opacity: 0.8;">Let's start fresh. I appreciate the effort.</p>
-    </div>
-
-    <div class="choice-card" onclick="sendChoice('Still mad but smiled')">
-      <h3 style="color: #ff5c8a; margin-bottom: 8px;">😏 Still mad, but I'm smiling</h3>
-      <p style="font-size: 13px; opacity: 0.8;">You're lucky this was kinda cute...</p>
-    </div>
-
-    <div class="choice-card" onclick="sendChoice('Not forgiven yet')">
-      <h3 style="color: #888; margin-bottom: 8px;">🤨 You'll need to try harder</h3>
-      <p style="font-size: 13px; opacity: 0.8;">Points for creativity though.</p>
-    </div>
-
-    <footer style="margin-top: 40px;">
-      Made with love, care, and way too much effort 💫<br>
-      <span style="font-size: 10px; opacity: 0.6;">
-        (Do you know how long CSS animations take? Like... hours. HOURS.)
-      </span>
-    </footer>
-  </div>
-
-  <!-- SCREEN 9: SUCCESS -->
-  <div class="screen hidden" id="screen9">
-    <h1>🎉 ✨ MISSION ACCOMPLISHED ✨ 🎉</h1>
-    
-    <div class="love-card" style="margin-top: 30px;">
-      <p style="font-size: 18px; margin-bottom: 20px;">
-        I knew this would work! 😌<br>
-        <span style="font-size: 14px; opacity: 0.7;">
-          (Okay fine, I was 60% sure. Maybe 40%. Definitely 20%.)
+  <div id="roseMessage" style="opacity: 0; transition: opacity 1.5s ease;">
+    <div class="love-card">
+      <p style="font-size: 17px; line-height: 1.8;">
+        Okay, I panicked and got you a <strong>digital rose</strong>.<br>
+        <span style="font-size: 14px; opacity: 0.8;">(But I saved money for a real one, promise! 😅)</span><br><br>
+        The thing is... the feelings behind it are<br>
+        <span class="pulse-heart" style="font-size: 20px; color: #ff3f75;">
+          <strong>annoyingly, inconveniently,<br>beautifully REAL.</strong>
         </span>
       </p>
+    </div>
+  </div>
 
-      <hr style="border: none; border-top: 1px solid rgba(255, 92, 138, 0.3); margin: 25px 0;">
+  <button onclick="goTo(7)" id="continueBtn" style="opacity: 0; transition: opacity 1s ease; margin-top: 20px;">
+    💝 CONTINUE TO MY CONFESSION
+  </button>
+</div>
 
-      <p style="font-size: 15px; line-height: 2; text-align: left;">
-        <strong style="color: #ff3f75;">I promise to:</strong><br>
-        <span class="pulse-heart">💖</span> Be less of an idiot, listen to you more<br>
-        <span class="pulse-heart">💖</span> Communicate way better<br>
-        <span class="pulse-heart">💖</span> Make you more digital roses (if needed)<br>
-        <span class="pulse-heart">💖</span> Actually mean it this time, I am actually working on myself so that I don't hurt you or anyone.
+<!-- SCREEN 7: CONFESSION -->
+<div class="screen hidden" id="screen7">
+  <div class="envelope" onclick="openEnvelope()" id="envelope">
+    <div class="envelope-body"></div>
+    <div class="envelope-flap"></div>
+    <div class="letter"></div>
+  </div>
+  
+  <p style="font-size: 14px; color: #ff5c8a; margin-bottom: 20px;">
+    👆 Open the letter above
+  </p>
+
+  <div id="confessionText" style="opacity: 0; transition: opacity 1s ease;">
+    <h1 style="margin-bottom: 25px;">No more jokes. Real talk. 💭</h1>
+    
+    <div class="love-card">
+      <p style="font-size: 16px; line-height: 2;">
+        I know I messed up.<br>
+        I'm not here to explain or defend myself.<br>
+        <br>
+        I just wanted you to know:<br>
+        <strong style="color: #ff3f75; font-size: 22px;">I miss us.</strong><br>
+        <br>
+        The laughs. The chaos. The random 2am texts.<br>
+        The way you make everything feel <em>lighter</em>.<br>
+        <br>
+        This whole dramatic production?<br>
+        <span style="color: #ff5c8a;">
+          It's my way of saying <strong>I care enough to try</strong>.
+        </span>
       </p>
     </div>
 
-    <button onclick="celebrateMore()" style="margin-top: 30px;">
-      🎊 CELEBRATE!
+    <button onclick="goTo(8)" style="margin-top: 25px;">
+      💌 SO... WHAT DO YOU SAY?
     </button>
-    
-    <button onclick="location.reload()" style="background: transparent; color: #ff5c8a; border: 2px solid #ff5c8a;">
-      🔄 EXPERIENCE IT AGAIN
-    </button>
-
-    <footer style="margin-top: 40px; font-size: 16px;">
-      <div class="pulse-heart" style="font-size: 24px; margin-bottom: 10px;">🌹</div>
-      <strong>Happy Rose Day</strong><br>
-      Here's to new beginnings. 💕
-    </footer>
   </div>
+</div>
+
+<!-- SCREEN 8: CHOICE -->
+<div class="screen hidden" id="screen8">
+  <h1>Decision Time 🎯</h1>
+  
+  <p style="margin: 20px 0 30px 0; font-size: 15px; line-height: 1.8;">
+    I know actions speak louder than words.<br>
+    But sometimes words (and overly dramatic web pages)<br>
+    are a <em>pretty good start</em>... right?<br>
+    <span style="font-size: 13px; opacity: 0.7;">...Right? 🥺</span>
+  </p>
+
+  <div class="choice-card" onclick="forgiven()">
+    <h3 style="color: #ff3f75; margin-bottom: 8px;">✅ Fine. You're forgiven.</h3>
+    <p style="font-size: 13px; opacity: 0.8;">Let's start fresh. I appreciate the effort.</p>
+  </div>
+
+  <div class="choice-card" onclick="progress()">
+    <h3 style="color: #ff5c8a; margin-bottom: 8px;">😏 Still mad, but I'm smiling</h3>
+    <p style="font-size: 13px; opacity: 0.8;">You're lucky this was kinda cute...</p>
+  </div>
+
+  <div class="choice-card" onclick="tryHarder()">
+    <h3 style="color: #888; margin-bottom: 8px;">🤨 You'll need to try harder</h3>
+    <p style="font-size: 13px; opacity: 0.8;">Points for creativity though.</p>
+  </div>
+
+  <footer style="margin-top: 40px;">
+    Made with caffeine, anxiety, and way too much effort 💫<br>
+    <span style="font-size: 10px; opacity: 0.6;">
+      (Do you know how long CSS animations take? Like... hours. HOURS.)
+    </span>
+  </footer>
+</div>
+
+<!-- SCREEN 9: SUCCESS -->
+<div class="screen hidden" id="screen9">
+  <h1>🎉 ✨ MISSION ACCOMPLISHED ✨ 🎉</h1>
+  
+  <div class="love-card" style="margin-top: 30px;">
+    <p style="font-size: 18px; margin-bottom: 20px;">
+      I knew this would work! 😌<br>
+      <span style="font-size: 14px; opacity: 0.7;">
+        (Okay fine, I was 60% sure. Maybe 40%. Definitely 20%.)
+      </span>
+    </p>
+
+    <hr style="border: none; border-top: 1px solid rgba(255, 92, 138, 0.3); margin: 25px 0;">
+
+    <p style="font-size: 15px; line-height: 2; text-align: left;">
+      <strong style="color: #ff3f75;">I promise to:</strong><br>
+      <span class="pulse-heart">💖</span> Be less of an idiot<br>
+      <span class="pulse-heart">💖</span> Communicate way better<br>
+      <span class="pulse-heart">💖</span> Make you more digital roses (if needed)<br>
+      <span class="pulse-heart">💖</span> Actually mean it this time
+    </p>
+  </div>
+
+  <button onclick="celebrateMore()" style="margin-top: 30px;">
+    🎊 CELEBRATE!
+  </button>
+  
+  <button onclick="location.reload()" style="background: transparent; color: #ff5c8a; border: 2px solid #ff5c8a;">
+    🔄 EXPERIENCE IT AGAIN
+  </button>
+
+  <footer style="margin-top: 40px; font-size: 16px;">
+    <div class="pulse-heart" style="font-size: 24px; margin-bottom: 10px;">🌹</div>
+    <strong>Happy Rose Day</strong><br>
+    Here's to new beginnings. 💕
+  </footer>
+</div>
 
   <script>
     // Sound system
