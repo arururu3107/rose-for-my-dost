@@ -286,6 +286,25 @@
     }
 
  /* ---------- ROSE THEME CENTERING FIX ---------- */
+    .rose {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto;
+}
+
+.rose .petal:nth-child(1) { transform: rotate(0deg); }
+.rose .petal:nth-child(2) { transform: rotate(72deg); }
+.rose .petal:nth-child(3) { transform: rotate(144deg); }
+.rose .petal:nth-child(4) { transform: rotate(216deg); }
+.rose .petal:nth-child(5) { transform: rotate(288deg); }
+
+.rose.open .petal:nth-child(1) { transform: translate(-40px, -40px); }
+.rose.open .petal:nth-child(2) { transform: translate(40px, -40px); }
+.rose.open .petal:nth-child(3) { transform: translate(50px, 10px); }
+.rose.open .petal:nth-child(4) { transform: translate(-50px, 10px); }
+.rose.open .petal:nth-child(5) { transform: translate(0, 50px); }
+
 body.rose {
   background: linear-gradient(135deg, #ffe6ec 0%, #ffd4e0 50%, #fff2f6 100%);
   color: #2a2a2a;
