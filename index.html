@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>CLASSIFIED - AUTHORIZED PERSONNEL ONLY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <style>
     /* ---------- RESET ---------- */
     * {
@@ -15,12 +14,12 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background 1s ease, color 1s ease, font-family 1s ease;
-      overflow-x: hidden;
+      overflow: hidden;
       position: relative;
     }
 
@@ -65,7 +64,6 @@
 
     .screen {
       max-width: 520px;
-      width: 90%;
       padding: 40px;
       text-align: center;
       animation: fadeIn 0.6s ease;
@@ -74,7 +72,6 @@
       background: rgba(0, 0, 0, 0.3);
       border-radius: 12px;
       backdrop-filter: blur(10px);
-      margin: 20px;
     }
 
     .hidden {
@@ -239,8 +236,7 @@
       padding: 12px 20px;
       font-size: 16px;
       border-radius: 8px;
-      width: 100%;
-      max-width: 280px;
+      width: 280px;
       text-align: center;
       font-family: "Courier New", monospace;
       letter-spacing: 4px;
@@ -288,56 +284,525 @@
       margin-right: 8px;
     }
 
+    /* ---------- SCANLINE EFFECT ---------- */
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(255, 95, 95, 0.03) 50%
+      );
+      background-size: 100% 4px;
+      animation: scan 8s linear infinite;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    @keyframes scan {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100%); }
+    }
+
+    /* ---------- DOSSIER STYLE ---------- */
+    .dossier {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border-left: 4px solid #ff5f5f;
+    }
+
+    .dossier-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 12px 0;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 95, 95, 0.2);
+    }
+
+    .dossier-label {
+      font-weight: 700;
+      color: #ff5f5f;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .dossier-value {
+      color: #e6e6eb;
+      font-size: 14px;
+    }
+
+    /* ---------- COUNTDOWN ---------- */
+    .countdown {
+      font-size: 48px;
+      font-weight: 700;
+      color: #ff5f5f;
+      margin: 20px 0;
+      font-family: "Courier New", monospace;
+      text-shadow: 0 0 20px rgba(255, 95, 95, 0.5);
+    }
+
+    /* ---------- SOUND TOGGLE ---------- */
+    .sound-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 95, 95, 0.2);
+      border: 2px solid #ff5f5f;
+      color: #ff5f5f;
+      padding: 10px 15px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 12px;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .sound-toggle:hover {
+      background: rgba(255, 95, 95, 0.4);
+    }
+
+    /* ========================================
+       NEW CREATIVE SCREENS 6-9
+    ======================================== */
+
     /* ---------- ROSE THEME ---------- */
     body.rose {
-      background: linear-gradient(135deg, #ffe6ec 0%, #ffd4e0 50%, #fff2f6 100%);
-      color: #2a2a2a;
-      font-family: Georgia, serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      font-family: 'Georgia', serif;
     }
 
     body.rose .screen {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(15px);
-      box-shadow: 0 20px 60px rgba(255, 92, 138, 0.2);
-      border: 1px solid rgba(255, 92, 138, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      max-width: 600px;
     }
 
-    body.rose button {
-      background: linear-gradient(135deg, #ff5c8a, #ff3f75);
-      color: white;
-      border: none;
-      box-shadow: 0 4px 15px rgba(255, 92, 138, 0.3);
+    /* ---------- SCREEN 6: MEMORY GALLERY ---------- */
+    .memory-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 30px 0;
     }
 
-    body.rose button:hover {
-      background: linear-gradient(135deg, #ff3f75, #ff1f5f);
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 8px 25px rgba(255, 92, 138, 0.5);
+    .memory-card {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, rgba(255, 92, 138, 0.2), rgba(255, 63, 117, 0.2));
+      border-radius: 15px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 2px solid rgba(255, 92, 138, 0.3);
     }
 
-    /* ---------- FLOATING PETALS BACKGROUND ---------- */
-    .floating-petal {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle, #ff82a8, #ff5c8a);
-      border-radius: 50% 0 50% 0;
-      opacity: 0.6;
+    .memory-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 40px rgba(255, 92, 138, 0.4);
+    }
+
+    .memory-card.revealed {
+      background: transparent;
+      animation: cardFlip 0.6s ease;
+    }
+
+    @keyframes cardFlip {
+      0%, 100% { transform: scale(1) rotateY(0deg); }
+      50% { transform: scale(1.1) rotateY(180deg); }
+    }
+
+    .memory-icon {
+      font-size: 40px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .memory-card.revealed .memory-icon {
+      opacity: 1;
+    }
+
+    .memory-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .memory-card.revealed .memory-image {
+      opacity: 1;
+    }
+
+    .memory-label {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      font-size: 11px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-weight: 600;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 5px;
+      border-radius: 5px;
+      margin: 0 10px;
+    }
+
+    .memory-card.revealed .memory-label {
+      opacity: 1;
+    }
+
+    /* ---------- SCREEN 7: CONSTELLATION OF US ---------- */
+    .constellation-container {
+      width: 100%;
+      height: 400px;
+      position: relative;
+      margin: 30px 0;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .star:hover {
+      transform: scale(1.5);
+      box-shadow: 0 0 20px rgba(255, 92, 138, 1);
+    }
+
+    .star.connected {
+      background: #ff5c8a;
+      box-shadow: 0 0 20px rgba(255, 92, 138, 1);
+    }
+
+    .constellation-line {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ff5c8a, transparent);
+      transform-origin: left center;
+      opacity: 0;
+      animation: drawLine 0.5s ease forwards;
+    }
+
+    @keyframes drawLine {
+      to { opacity: 0.6; }
+    }
+
+    .constellation-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      font-weight: 600;
+      color: #ff5c8a;
+      opacity: 0;
+      transition: opacity 1s ease;
+      text-shadow: 0 0 20px rgba(255, 92, 138, 0.8);
       pointer-events: none;
-      animation: floatPetal 8s infinite ease-in-out;
+      text-align: center;
+      width: 80%;
+    }
+
+    .constellation-message.show {
+      opacity: 1;
+    }
+
+    /* ---------- SCREEN 8: POLAROID WALL ---------- */
+    .polaroid-wall {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px 0;
+      perspective: 1000px;
+    }
+
+    .polaroid {
+      width: 140px;
+      background: white;
+      padding: 15px 15px 40px 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .polaroid:nth-child(1) { transform: rotate(-5deg); }
+    .polaroid:nth-child(2) { transform: rotate(3deg); }
+    .polaroid:nth-child(3) { transform: rotate(-2deg); }
+    .polaroid:nth-child(4) { transform: rotate(4deg); }
+
+    .polaroid:hover {
+      transform: scale(1.2) rotate(0deg) !important;
+      z-index: 10;
+    }
+
+    .polaroid-image {
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .polaroid-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .polaroid-caption {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 11px;
+      color: #333;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* ---------- SCREEN 9: FORGIVENESS SCALE ---------- */
+    .forgiveness-container {
+      margin: 40px 0;
+    }
+
+    .mood-selector {
+      display: flex;
+      justify-content: space-around;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
+
+    .mood-button {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.05);
+      font-size: 50px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px;
+    }
+
+    .mood-button:hover {
+      transform: scale(1.2);
+      border-color: #ff5c8a;
+      background: rgba(255, 92, 138, 0.2);
+    }
+
+    .mood-button.selected {
+      transform: scale(1.3);
+      border-color: #ff5c8a;
+      background: linear-gradient(135deg, #ff5c8a, #ff3f75);
+      box-shadow: 0 10px 40px rgba(255, 92, 138, 0.6);
+      animation: moodPulse 2s infinite;
+    }
+
+    @keyframes moodPulse {
+      0%, 100% { box-shadow: 0 10px 40px rgba(255, 92, 138, 0.6); }
+      50% { box-shadow: 0 10px 60px rgba(255, 92, 138, 0.9); }
+    }
+
+    .mood-label {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    .slider-container {
+      margin: 50px 20px;
+    }
+
+    .forgiveness-slider {
+      width: 100%;
+      height: 8px;
+      border-radius: 10px;
+      background: linear-gradient(to right, #ff1744, #ffa726, #66bb6a);
+      outline: none;
+      -webkit-appearance: none;
+      position: relative;
+    }
+
+    .forgiveness-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: white;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .forgiveness-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.3);
+      box-shadow: 0 5px 30px rgba(255, 92, 138, 0.8);
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 11px;
+      opacity: 0.7;
+    }
+
+    .heart-meter {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 30px 0;
+      font-size: 40px;
+    }
+
+    .heart-icon {
+      transition: all 0.3s ease;
+      filter: grayscale(100%);
+      opacity: 0.3;
+    }
+
+    .heart-icon.filled {
+      filter: grayscale(0%);
+      opacity: 1;
+      animation: heartBeat 0.6s ease;
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.3); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* ---------- FINAL RESPONSE ---------- */
+    .final-message {
+      background: linear-gradient(135deg, rgba(255, 92, 138, 0.2), rgba(255, 63, 117, 0.2));
+      padding: 30px;
+      border-radius: 20px;
+      margin: 30px 0;
+      border: 2px solid rgba(255, 92, 138, 0.5);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    .final-message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---------- CONFETTI ---------- */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      animation: confettiFall 3s linear forwards;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    @keyframes confettiFall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- FIREWORKS ---------- */
+    .firework {
+      position: fixed;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .firework-particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      animation: fireworkExplosion 1s ease-out forwards;
+    }
+
+    @keyframes fireworkExplosion {
+      0% {
+        transform: translate(0, 0);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--tx), var(--ty));
+        opacity: 0;
+      }
+    }
+
+    /* ---------- FLOATING HEARTS ---------- */
+    .floating-heart {
+      position: fixed;
+      font-size: 30px;
+      pointer-events: none;
+      animation: floatUp 4s ease-in forwards;
       z-index: 0;
     }
 
-    @keyframes floatPetal {
+    @keyframes floatUp {
       0% {
-        transform: translateY(-20px) rotate(0deg);
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
         opacity: 0;
       }
-      10% {
-        opacity: 0.6;
-      }
-      90% {
-        opacity: 0.6;
+    }
+
+    /* ---------- ROSE PETALS ---------- */
+    .rose-petal {
+      position: fixed;
+      width: 15px;
+      height: 15px;
+      background: radial-gradient(circle, #ff82a8, #ff5c8a);
+      border-radius: 50% 0 50% 0;
+      opacity: 0.7;
+      pointer-events: none;
+      animation: petalFall 6s linear forwards;
+      z-index: 0;
+    }
+
+    @keyframes petalFall {
+      0% {
+        transform: translateY(-20px) rotate(0deg);
+        opacity: 0.7;
       }
       100% {
         transform: translateY(100vh) rotate(360deg);
@@ -345,676 +810,291 @@
       }
     }
 
-    /* ---------- ROSE CONTAINER ---------- */
-    .rose-container {
-      width: 180px;
-      height: 220px;
-      margin: 30px auto;
-      position: relative;
-      cursor: pointer;
-      transition: transform 0.5s ease;
-      filter: drop-shadow(0 10px 30px rgba(255, 92, 138, 0.4));
+    body.rose button {
+      background: linear-gradient(135deg, #ff5c8a, #ff3f75);
+      color: white;
+      border: none;
     }
 
-    .rose-container:hover {
-      transform: scale(1.1) rotate(5deg);
+    body.rose button:hover {
+      background: linear-gradient(135deg, #ff3f75, #ff1f5f);
+      transform: translateY(-3px) scale(1.05);
     }
+  </style>
+</head>
 
-    .rose-container.clicked {
-      animation: roseShake 0.5s ease;
-    }
+<body class="dark">
+  <!-- SCANLINE EFFECT -->
+  <div class="scanline"></div>
 
-    @keyframes roseShake {
-      0%, 100% { transform: scale(1.1) rotate(0deg); }
-      25% { transform: scale(1.15) rotate(-5deg); }
-      75% { transform: scale(1.15) rotate(5deg); }
-    }
-
-    /* ---------- ROSE FLOWER ---------- */
-    .rose {
-      position: relative;
-      width: 140px;
-      height: 140px;
-      margin: 0 auto;
-    }
-
-    .petal {
-      position: absolute;
-      width: 70px;
-      height: 70px;
-      background: radial-gradient(circle at 30% 30%, #ff82a8, #ff5c8a);
-      border-radius: 50%;
-      top: 35px;
-      left: 35px;
-      transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      box-shadow: 0 5px 15px rgba(255, 92, 138, 0.4);
-    }
-
-    .rose .petal:nth-child(1) { transform: rotate(0deg) translateY(-10px); z-index: 3; }
-    .rose .petal:nth-child(2) { transform: rotate(72deg) translateY(-10px); z-index: 2; }
-    .rose .petal:nth-child(3) { transform: rotate(144deg) translateY(-10px); z-index: 2; }
-    .rose .petal:nth-child(4) { transform: rotate(216deg) translateY(-10px); z-index: 1; }
-    .rose .petal:nth-child(5) { transform: rotate(288deg) translateY(-10px); z-index: 1; }
-
-    .rose.open .petal:nth-child(1) { transform: translate(-40px, -40px); }
-    .rose.open .petal:nth-child(2) { transform: translate(40px, -40px); }
-    .rose.open .petal:nth-child(3) { transform: translate(50px, 10px); }
-    .rose.open .petal:nth-child(4) { transform: translate(-50px, 10px); }
-    .rose.open .petal:nth-child(5) { transform: translate(0, 50px); }
-
-    .rose.open .petal {
-      animation: petalGlow 2s infinite alternate;
-    }
-
-    @keyframes petalGlow {
-      from {
-        box-shadow: 0 5px 15px rgba(255, 92, 138, 0.4);
-      }
-      to {
-        box-shadow: 0 10px 30px rgba(255, 92, 138, 0.8);
-      }
-    }
-
-    /* ---------- STEM AND LEAVES ---------- */
-    .stem {
-      position: absolute;
-      width: 4px;
-      height: 80px;
-      background: linear-gradient(to bottom, #4ade80, #22c55e);
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 2px;
-    }
-
-    .leaf {
-      position: absolute;
-      width: 30px;
-      height: 15px;
-      background: #4ade80;
-      border-radius: 0 50% 50% 0;
-      bottom: 40px;
-    }
-
-    .leaf.left {
-      left: 20px;
-      transform: rotate(-30deg);
-    }
-
-    .leaf.right {
-      right: 20px;
-      transform: rotate(30deg) scaleX(-1);
-    }
-
-    /* ---------- SPARKLES ---------- */
-    .sparkle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: white;
-      border-radius: 50%;
-      animation: sparkleAnimation 1.5s infinite;
-      pointer-events: none;
-    }
-
-    @keyframes sparkleAnimation {
-      0%, 100% {
-        transform: scale(0);
-        opacity: 0;
-      }
-      50% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    /* ---------- LOVE MESSAGE CARD ---------- */
-    .love-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 245, 250, 0.95));
-      padding: 30px;
-      border-radius: 20px;
-      margin: 25px 0;
-      box-shadow: 0 15px 40px rgba(255, 92, 138, 0.25);
-      border: 2px solid rgba(255, 92, 138, 0.3);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .love-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 50px rgba(255, 92, 138, 0.4);
-    }
-
-    .love-card::before {
-      content: '💕';
-      position: absolute;
-      font-size: 120px;
-      opacity: 0.05;
-      top: -20px;
-      right: -20px;
-      transform: rotate(15deg);
-    }
-
-    /* ---------- PULSE HEART ---------- */
-    .pulse-heart {
-      display: inline-block;
-      animation: heartPulse 1.5s infinite;
-    }
-
-    @keyframes heartPulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.2);
-      }
-    }
-
-    /* ---------- CHOICE CARDS ---------- */
-  .choice-card {
-  background: linear-gradient(135deg, #ffffff, #fff5f8);
-  padding: 20px;
-  border-radius: 15px;
-  margin: 15px 0;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  box-shadow: 0 5px 15px rgba(255, 92, 138, 0.1);
-}
-
-.choice-card:hover {
-  border-color: #ff5c8a;
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(255, 92, 138, 0.3);
-}
-
-.choice-card.selected {
-  border-color: #ff3f75;
-  background: linear-gradient(135deg, #fff0f5, #ffe6ec);
-  transform: scale(1.02);
-}
-
-/* ---------- ANIMATED ENVELOPE ---------- */
-.envelope {
-  width: 100px;
-  height: 70px;
-  position: relative;
-  margin: 20px auto;
-  cursor: pointer;
-}
-
-.envelope-flap {
-  width: 0;
-  height: 0;
-  border-left: 50px solid transparent;
-  border-right: 50px solid transparent;
-  border-top: 35px solid #ff5c8a;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-origin: top;
-  transition: transform 0.6s ease;
-}
-
-.envelope-body {
-  width: 100px;
-  height: 70px;
-  background: #ff82a8;
-  position: absolute;
-  top: 0;
-  border-radius: 0 0 5px 5px;
-}
-
-.envelope.open .envelope-flap {
-  transform: rotateX(180deg);
-}
-
-.letter {
-  width: 80px;
-  height: 50px;
-  background: white;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  border-radius: 3px;
-  transition: transform 0.6s ease;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.envelope.open .letter {
-  transform: translateY(-40px);
-}
-
-/* ---------- FIREWORKS ---------- */
-.firework {
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-.firework-particle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  animation: fireworkExplosion 1s ease-out forwards;
-}
-
-@keyframes fireworkExplosion {
-  0% {
-    transform: translate(0, 0);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(var(--tx), var(--ty));
-    opacity: 0;
-  }
-}
-
-/* ---------- SCANLINE EFFECT ---------- */
-.scanline {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    transparent 50%,
-    rgba(255, 95, 95, 0.03) 50%
-  );
-  background-size: 100% 4px;
-  animation: scan 8s linear infinite;
-  pointer-events: none;
-  z-index: 999;
-}
-
-@keyframes scan {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(100%); }
-}
-
-/* ---------- DOSSIER STYLE ---------- */
-.dossier {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 8px;
-  margin: 20px 0;
-  border-left: 4px solid #ff5f5f;
-}
-
-.dossier-item {
-  display: flex;
-  justify-content: space-between;
-  margin: 12px 0;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255, 95, 95, 0.2);
-}
-
-.dossier-label {
-  font-weight: 700;
-  color: #ff5f5f;
-  text-transform: uppercase;
-  font-size: 12px;
-  letter-spacing: 1px;
-}
-
-.dossier-value {
-  color: #e6e6eb;
-  font-size: 14px;
-  text-align: right;
-}
-
-/* ---------- COUNTDOWN ---------- */
-.countdown {
-  font-size: 48px;
-  font-weight: 700;
-  color: #ff5f5f;
-  margin: 20px 0;
-  font-family: "Courier New", monospace;
-  text-shadow: 0 0 20px rgba(255, 95, 95, 0.5);
-}
-
-/* ---------- FOOTER ---------- */
-footer {
-  margin-top: 30px;
-  font-size: 11px;
-  opacity: 0.5;
-  font-style: italic;
-}
-
-/* ---------- SOUND TOGGLE ---------- */
-.sound-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: rgba(255, 95, 95, 0.2);
-  border: 2px solid #ff5f5f;
-  color: #ff5f5f;
-  padding: 10px 15px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 12px;
-  z-index: 1000;
-  transition: all 0.3s ease;
-}
-
-body.rose .sound-toggle {
-  background: rgba(255, 92, 138, 0.2);
-  border-color: #ff5c8a;
-  color: #ff5c8a;
-}
-
-.sound-toggle:hover {
-  background: rgba(255, 95, 95, 0.4);
-}
-
-body.rose .sound-toggle:hover {
-  background: rgba(255, 92, 138, 0.4);
-}
-
-/* ---------- CONFETTI ---------- */
-.confetti {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  top: -10px;
-  animation: confettiFall 3s linear forwards;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-@keyframes confettiFall {
-  to {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 600px) {
-  h1 {
-    font-size: 22px;
-  }
-  
-  .screen {
-    padding: 30px 20px;
-  }
-  
-  button {
-    padding: 12px 20px;
-    font-size: 12px;
-  }
-  
-  .love-card {
-    padding: 20px;
-  }
-  
-  .countdown {
-    font-size: 36px;
-  }
-  
-  .rose-container {
-    width: 150px;
-    height: 180px;
-  }
-}
-    </style>
-    <!-- SCANLINE EFFECT -->
-<div class="scanline"></div>
-
-<!-- SOUND TOGGLE -->
-<div class="sound-toggle" onclick="toggleSound()">
-  🔇 <span id="soundStatus">Enable Sound</span>
-</div>
-
-<!-- PARTICLES -->
-<div class="particles" id="particles"></div>
-
-<!-- SCREEN 1: WARNING -->
-<div class="screen" id="screen1">
-  <div class="stamp glitch">⚠ TOP SECRET ⚠</div>
-  <h1 class="typing">RESTRICTED FILE</h1>
-  <p style="margin-top: 30px;">
-    ⚠️ <strong>WARNING:</strong> Unauthorized access detected<br>
-    <span style="color: #ff5f5f;">Classification Level: PERSONAL</span><br>
-    <span style="opacity: 0.7;">If you're reading this, you weren't supposed to find it...jkjk</span>
-  </p>
-  <button onclick="goTo(2)">🔓 PROCEED ANYWAY</button>
-  <button onclick="abort()" style="opacity: 0.6;">❌ ABORT MISSION</button>
-</div>
-
-<!-- SCREEN 2: PASSWORD -->
-<div class="screen hidden" id="screen2">
-  <div class="stamp">🔐 SECURITY CHECKPOINT</div>
-  <h1>IDENTITY VERIFICATION REQUIRED</h1>
-  <p>Enter my laptop/ipad/smol phone ka password<br>(Format: DDMM)</p>
-  
-  <div class="password-container">
-    <input type="password" id="passwordInput" maxlength="4" placeholder="••••" 
-           onkeypress="if(event.key==='Enter') checkPassword()">
-  </div>
-  
-  <button onclick="checkPassword()">🔑 VERIFY</button>
-  <p class="hint">💡 No hint if you dk your own bday then what can I say</p>
-  <p class="hint" style="color: #ff5f5f; margin-top: 15px;">
-    (Just kidding, any 4 digits work. But points for trying! 😏)
-  </p>
-</div>
-
-<!-- SCREEN 3: DOSSIER -->
-<div class="screen hidden" id="screen3">
-  <div class="stamp">📂 CASE FILE #0214</div>
-  <h1>SUBJECT PROFILE</h1>
-  
-  <div class="dossier">
-    <div class="dossier-item">
-      <span class="dossier-label">Suspect:</span>
-      <span class="dossier-value">Me (unfortunately)</span>
-    </div>
-    <div class="dossier-item">
-      <span class="dossier-label">Subject:</span>
-      <span class="dossier-value">You</span>
-    </div>
-    <div class="dossier-item">
-      <span class="dossier-label">Status:</span>
-      <span class="dossier-value">My Fav Person</span>
-    </div>
-    <div class="dossier-item">
-      <span class="dossier-label">Threat Level:</span>
-      <span class="dossier-value">CRITICAL (to my heart)</span>
-    </div>
-    <div class="dossier-item">
-      <span class="dossier-label">Last Contact:</span>
-      <span class="dossier-value">Today but proper contact was wayyyy too long ago</span>
-    </div>
-    <div class="dossier-item">
-      <span class="dossier-label">Apology Status:</span>
-      <span class="dossier-value">⏳ Pending :(</span>
-    </div>
+  <!-- SOUND TOGGLE -->
+  <div class="sound-toggle" onclick="toggleSound()">
+    🔇 <span id="soundStatus">Enable Sound</span>
   </div>
 
-  <button onclick="goTo(4)">📖 OPEN FULL FILE</button>
-</div>
+  <!-- PARTICLES -->
+  <div class="particles" id="particles"></div>
 
-<!-- SCREEN 4: ANALYSIS -->
-<div class="screen hidden" id="screen4">
-  <h1>SYSTEM DIAGNOSTICS</h1>
-  
-  <div class="terminal" id="terminal">
-    <div class="terminal-line"><span class="terminal-prompt">></span> Initializing emotional recovery protocol...</div>
-  </div>
-  
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
-  
-  <p class="loader">⚙️ Analyzing damage... Please wait...</p>
-  <button onclick="skipAnalysis()" style="opacity: 0.7; font-size: 11px; margin-top: 20px;">
-    SKIP ANALYSIS (Impatient, I see 😏)
-  </button>
-</div>
-
-<!-- SCREEN 5: COUNTDOWN -->
-<div class="screen hidden" id="screen5">
-  <div class="stamp">⏱️ CRITICAL MOMENT</div>
-  <h1>SYSTEM OVERRIDE IN</h1>
-  
-  <div class="countdown" id="countdown">3</div>
-  
-  <p>Prepare for emotional content...</p>
-</div>
-
-<!-- SCREEN 6: ROSE REVEAL -->
-<div class="screen hidden" id="screen6">
-  <h1>🌹 HAPPY ROSE DAY 🌹</h1>
-  
-  <p style="font-size: 16px; margin: 15px 0; color: #ff3f75;">
-    <strong>✨ Click the rose to bloom it! ✨</strong>
-  </p>
-
-  <div class="rose-container" onclick="openRose()" id="roseContainer">
-    <div class="rose" id="roseFlower">
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-    </div>
-    <div class="stem"></div>
-    <div class="leaf left"></div>
-    <div class="leaf right"></div>
+  <!-- SCREEN 1: WARNING -->
+  <div class="screen" id="screen1">
+    <div class="stamp glitch">⚠ TOP SECRET ⚠</div>
+    <h1 class="typing">ARU'S RESTRICTED FILE</h1>
+    <p style="margin-top: 30px;">
+      ⚠️ <strong>WARNING:</strong> Unauthorized access detected<br>
+      <span style="color: #ff5f5f;">Classification Level: PERSONAL</span><br>
+      <span style="opacity: 0.7;">If you're reading this, you weren't supposed to find it...JKJK</span>
+    </p>
+    <button onclick="goTo(2)">🔓 PROCEED ANYWAY</button>
+    <button onclick="abort()" style="opacity: 0.6;">❌ ABORT MISSION</button>
   </div>
 
-  <div id="roseMessage" style="opacity: 0; transition: opacity 1.5s ease;">
-    <div class="love-card">
-      <p style="font-size: 17px; line-height: 1.8;">
-        Okay, I panicked and got you a <strong>digital rose</strong>.<br>
-        <span style="font-size: 14px; opacity: 0.8;">(But I saved money for a real one, promise! 😅)</span><br><br>
-        The thing is... the feelings behind it are<br>
-        <span class="pulse-heart" style="font-size: 20px; color: #ff3f75;">
-          <strong>annoyingly, inconveniently,<br>beautifully REAL.</strong>
-        </span>
-      </p>
-    </div>
-  </div>
-
-  <button onclick="goTo(7)" id="continueBtn" style="opacity: 0; transition: opacity 1s ease; margin-top: 20px;">
-    💝 CONTINUE TO MY CONFESSION
-  </button>
-</div>
-
-<!-- SCREEN 7: CONFESSION -->
-<div class="screen hidden" id="screen7">
-  <div class="envelope" onclick="openEnvelope()" id="envelope">
-    <div class="envelope-body"></div>
-    <div class="envelope-flap"></div>
-    <div class="letter"></div>
-  </div>
-  
-  <p style="font-size: 14px; color: #ff5c8a; margin-bottom: 20px;">
-    👆 Open the letter above
-  </p>
-
-  <div id="confessionText" style="opacity: 0; transition: opacity 1s ease;">
-    <h1 style="margin-bottom: 25px;">No more jokes. Real talk. 💭</h1>
+  <!-- SCREEN 2: PASSWORD -->
+  <div class="screen hidden" id="screen2">
+    <div class="stamp">🔐 SECURITY CHECKPOINT</div>
+    <h1>IDENTITY VERIFICATION REQUIRED</h1>
+    <p>Enter the password to my laptop/ipad/smol phone<br>(Format: MMDD)</p>
     
-    <div class="love-card">
-      <p style="font-size: 16px; line-height: 2;">
-        I know I messed up.<br>
-        I'm not here to explain or defend myself.<br>
-        <br>
-        I just wanted you to know:<br>
-        <strong style="color: #ff3f75; font-size: 22px;">I miss us.</strong><br>
-        <br>
-        The laughs. The chaos. The random 2am texts.<br>
-        The way you make everything feel <em>lighter</em>.<br>
-        <br>
-        This whole dramatic production?<br>
-        <span style="color: #ff5c8a;">
-          It's my way of saying <strong>I care enough to try</strong>.
-        </span>
-      </p>
+    <div class="password-container">
+      <input type="password" id="passwordInput" maxlength="4" placeholder="••••" 
+             onkeypress="if(event.key==='Enter') checkPassword()">
     </div>
+    
+    <button onclick="checkPassword()">🔑 VERIFY</button>
+    <p class="hint">💡 Hint: There's no hint if you can't recall ur bday then I don't have anything to say</p>
+    <p class="hint" style="color: #ff5f5f; margin-top: 15px;">
+      (Just kidding, any 4 digits work.)
+    </p>
+  </div>
 
-    <button onclick="goTo(8)" style="margin-top: 25px;">
-      💌 SO... WHAT DO YOU SAY?
+  <!-- SCREEN 3: DOSSIER -->
+  <div class="screen hidden" id="screen3">
+    <div class="stamp">📂 CASE FILE #1206</div>
+    <h1>SUBJECT PROFILE</h1>
+    
+    <div class="dossier">
+       <div class="dossier-item">
+        <span class="dossier-label">Suspect:</span>
+        <span class="dossier-value">Me (unfortunately)</span>
+      </div>
+      <div class="dossier-item">
+        <span class="dossier-label">Subject:</span>
+        <span class="dossier-value">You</span>
+      </div>
+      <div class="dossier-item">
+        <span class="dossier-label">Status:</span>
+        <span class="dossier-value">My Fav Human</span>
+      </div>
+      <div class="dossier-item">
+        <span class="dossier-label">Threat Level:</span>
+        <span class="dossier-value"> CRITICAL (to my heart)</span>
+      </div>
+      <div class="dossier-item">
+        <span class="dossier-label">Last Contact:</span>
+        <span class="dossier-value">Today but tbvh Too long ago type shi</span>
+      </div>
+      <div class="dossier-item">
+        <span class="dossier-label">Apology Status:</span>
+        <span class="dossier-value">⏳ Pending :(</span>
+      </div>
+    </div>
+    <button onclick="goTo(4)">📖 OPEN FULL FILE</button>
+  </div>
+
+  <!-- SCREEN 4: ANALYSIS -->
+  <div class="screen hidden" id="screen4">
+    <h1>SYSTEM DIAGNOSTICS</h1>
+    
+    <div class="terminal" id="terminal">
+      <div class="terminal-line"><span class="terminal-prompt">></span> Initializing emotional recovery protocol...</div>
+    </div>
+    
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    
+    <p class="loader">⚙️ Analyzing damage... Please wait...</p>
+    <button onclick="skipAnalysis()" style="opacity: 0.7; font-size: 11px; margin-top: 20px;">
+      SKIP ANALYSIS (Impatient, I see 😏)
     </button>
   </div>
-</div>
 
-<!-- SCREEN 8: CHOICE -->
-<div class="screen hidden" id="screen8">
-  <h1>Decision Time 🎯</h1>
-  
-  <p style="margin: 20px 0 30px 0; font-size: 15px; line-height: 1.8;">
-    I know actions speak louder than words.<br>
-    But sometimes words (and overly dramatic web pages)<br>
-    are a <em>pretty good start</em>... right?<br>
-    <span style="font-size: 13px; opacity: 0.7;">...Right? 🥺</span>
-  </p>
-
-  <div class="choice-card" onclick="forgiven()">
-    <h3 style="color: #ff3f75; margin-bottom: 8px;">✅ Fine. You're forgiven.</h3>
-    <p style="font-size: 13px; opacity: 0.8;">Let's start fresh. I appreciate the effort.</p>
+  <!-- SCREEN 5: COUNTDOWN -->
+  <div class="screen hidden" id="screen5">
+    <div class="stamp">⏱️ CRITICAL MOMENT</div>
+    <h1>SYSTEM OVERRIDE IN</h1>
+    
+    <div class="countdown" id="countdown">3</div>
+    
+    <p>Prepare for emotional content...</p>
   </div>
 
-  <div class="choice-card" onclick="progress()">
-    <h3 style="color: #ff5c8a; margin-bottom: 8px;">😏 Still mad, but I'm smiling</h3>
-    <p style="font-size: 13px; opacity: 0.8;">You're lucky this was kinda cute...</p>
+  <!-- SCREEN 6: MEMORY GALLERY -->
+  <div class="screen hidden" id="screen6">
+    <h1>🌹 Our Memories Together 🌹</h1>
+    <p style="opacity: 0.8; margin: 20px 0;">Click each card to reveal a special moment...</p>
+    
+    <div class="memory-gallery" id="memoryGallery">
+      <!-- Replace the image URLs below with your actual image URLs -->
+      <div class="memory-card" onclick="revealMemory(this)">
+        <img src="https://via.placeholder.com/200x200/ff5c8a/ffffff?text=Photo+1" alt="Memory 1" class="memory-image">
+        <div class="memory-label">First Laugh</div>
+      </div>
+      <div class="memory-card" onclick="revealMemory(this)">
+        <img src="https://via.placeholder.com/200x200/ff5c8a/ffffff?text=Photo+2" alt="Memory 2" class="memory-image">
+        <div class="memory-label">Coffee Dates</div>
+      </div>
+      <div class="memory-card" onclick="revealMemory(this)">
+        <img src="https://via.placeholder.com/200x200/ff5c8a/ffffff?text=Photo+3" alt="Memory 3" class="memory-image">
+        <div class="memory-label">Late Nights</div>
+      </div>
+      <div class="memory-card" onclick="revealMemory(this)">
+        <img src="https://via.placeholder.com/200x200/ff5c8a/ffffff?text=Photo+4" alt="Memory 4" class="memory-image">
+        <div class="memory-label">Our Song</div>
+      </div>
+      <div class="memory-card" onclick="revealMemory(this)">
+        <img src="https://via.placeholder.com/200x200/ff5c8a/ffffff?text=Photo+5" alt="Memory 5" class="memory-image">
+        <div class="memory-label">Movie Nights</div>
+      </div>
+      <div class="memory-card" onclick="revealMemory(this)">
+        <img src="https://via.placeholder.com/200x200/ff5c8a/ffffff?text=Photo+6" alt="Memory 6" class="memory-image">
+        <div class="memory-label">Deep Talks</div>
+      </div>
+      <div class="memory-card" onclick="revealMemory(this)">
+        <img src="https://via.placeholder.com/200x200/ff5c8a/ffffff?text=Photo+7" alt="Memory 7" class="memory-image">
+        <div class="memory-label">Adventures</div>
+      </div>
+      <div class="memory-card" onclick="revealMemory(this)">
+        <img src="https://via.placeholder.com/200x200/ff5c8a/ffffff?text=Photo+8" alt="Memory 8" class="memory-image">
+        <div class="memory-label">Happy Days</div>
+      </div>
+      <div class="memory-card" onclick="revealMemory(this)">
+        <img src="https://via.placeholder.com/200x200/ff5c8a/ffffff?text=Photo+9" alt="Memory 9" class="memory-image">
+        <div class="memory-label">Every Moment</div>
+      </div>
+    </div>
+
+    <button onclick="goTo(7)" id="continueBtn6" style="opacity: 0; transition: opacity 0.5s ease; margin-top: 30px;">
+      ✨ CONTINUE TO NEXT
+    </button>
   </div>
 
-  <div class="choice-card" onclick="tryHarder()">
-    <h3 style="color: #888; margin-bottom: 8px;">🤨 You'll need to try harder</h3>
-    <p style="font-size: 13px; opacity: 0.8;">Points for creativity though.</p>
+  <!-- SCREEN 7: CONSTELLATION -->
+  <div class="screen hidden" id="screen7">
+    <h1>⭐ Connect the Stars ⭐</h1>
+    <p style="opacity: 0.8; margin: 20px 0;">Click any star to begin, then connect them in order...</p>
+    
+    <div class="constellation-container" id="constellation">
+      <div class="constellation-message" id="constellationMessage">
+        I'm sorry.<br>I miss us.
+      </div>
+    </div>
+
+    <button onclick="goTo(8)" id="continueBtn7" style="opacity: 0; transition: opacity 0.5s ease; margin-top: 30px;">
+      💫 CONTINUE
+    </button>
   </div>
 
-  <footer style="margin-top: 40px;">
-    Made with caffeine, anxiety, and way too much effort 💫<br>
-    <span style="font-size: 10px; opacity: 0.6;">
-      (Do you know how long CSS animations take? Like... hours. HOURS.)
-    </span>
-  </footer>
-</div>
+  <!-- SCREEN 8: POLAROID WALL -->
+  <div class="screen hidden" id="screen8">
+    <h1>📸 Snapshots of Us 📸</h1>
+    <p style="opacity: 0.8; margin: 20px 0;">Hover over each polaroid...</p>
+    
+    <div class="polaroid-wall">
+      <!-- Replace the image URLs below with your actual image URLs -->
+      <div class="polaroid">
+        <div class="polaroid-image">
+          <img src="https://via.placeholder.com/140x120/667eea/ffffff?text=Us+1" alt="Polaroid 1">
+        </div>
+        <div class="polaroid-caption">Your smile</div>
+      </div>
+      <div class="polaroid">
+        <div class="polaroid-image">
+          <img src="https://via.placeholder.com/140x120/764ba2/ffffff?text=Us+2" alt="Polaroid 2">
+        </div>
+        <div class="polaroid-caption">Our sunsets</div>
+      </div>
+      <div class="polaroid">
+        <div class="polaroid-image">
+          <img src="https://via.placeholder.com/140x120/f093fb/ffffff?text=Us+3" alt="Polaroid 3">
+        </div>
+        <div class="polaroid-caption">My feelings</div>
+      </div>
+      <div class="polaroid">
+        <div class="polaroid-image">
+          <img src="https://via.placeholder.com/140x120/4facfe/ffffff?text=Us+4" alt="Polaroid 4">
+        </div>
+        <div class="polaroid-caption">Our future?</div>
+      </div>
+    </div>
 
-<!-- SCREEN 9: SUCCESS -->
-<div class="screen hidden" id="screen9">
-  <h1>🎉 ✨ MISSION ACCOMPLISHED ✨ 🎉</h1>
-  
-  <div class="love-card" style="margin-top: 30px;">
-    <p style="font-size: 18px; margin-bottom: 20px;">
-      I knew this would work! 😌<br>
-      <span style="font-size: 14px; opacity: 0.7;">
-        (Okay fine, I was 60% sure. Maybe 40%. Definitely 20%.)
-      </span>
-    </p>
+    <div style="margin-top: 40px; padding: 20px; background: rgba(255, 92, 138, 0.1); border-radius: 15px;">
+      <p style="font-size: 16px; line-height: 1.8;">
+        Every moment with you has been precious.<br>
+        I messed up, and I know it.<br>
+        But I'm hoping for a chance to make new memories...<br>
+        <strong style="color: #ff5c8a;">Better ones. Together.</strong>
+      </p>
+    </div>
 
-    <hr style="border: none; border-top: 1px solid rgba(255, 92, 138, 0.3); margin: 25px 0;">
-
-    <p style="font-size: 15px; line-height: 2; text-align: left;">
-      <strong style="color: #ff3f75;">I promise to:</strong><br>
-      <span class="pulse-heart">💖</span> Be less of an idiot<br>
-          <span class="pulse-heart">💖</span> Communicate way better<br>
-      <span class="pulse-heart">💖</span> Make you more digital roses (if needed)<br>
-      <span class="pulse-heart">💖</span> Actually mean it this time
-    </p>
+    <button onclick="goTo(9)" style="margin-top: 30px;">
+      💖 FINAL QUESTION
+    </button>
   </div>
 
-  <button onclick="celebrateMore()" style="margin-top: 30px;">
-    🎊 CELEBRATE!
-  </button>
-  
-  <button onclick="location.reload()" style="background: transparent; color: #ff5c8a; border: 2px solid #ff5c8a;">
-    🔄 EXPERIENCE IT AGAIN
-  </button>
+  <!-- SCREEN 9: FORGIVENESS SCALE -->
+  <div class="screen hidden" id="screen9">
+    <h1>💭 How Are You Feeling? 💭</h1>
+    <p style="opacity: 0.8; margin: 20px 0;">Pick the emoji that represents your mood...</p>
+    
+    <div class="mood-selector">
+      <div>
+        <div class="mood-button" onclick="selectMood(this, 1)">😤</div>
+        <div class="mood-label">Still Mad</div>
+      </div>
+      <div>
+        <div class="mood-button" onclick="selectMood(this, 2)">😐</div>
+        <div class="mood-label">Neutral</div>
+      </div>
+      <div>
+        <div class="mood-button" onclick="selectMood(this, 3)">😏</div>
+        <div class="mood-label">Softening</div>
+      </div>
+      <div>
+        <div class="mood-button" onclick="selectMood(this, 4)">😊</div>
+        <div class="mood-label">Forgiving</div>
+      </div>
+    </div>
 
-  <footer style="margin-top: 40px; font-size: 16px;">
-    <div class="pulse-heart" style="font-size: 24px; margin-bottom: 10px;">🌹</div>
-    <strong>Happy Rose Day</strong><br>
-    Here's to new beginnings. 💕
-  </footer>
-</div>
+    <div class="slider-container" style="margin-top: 50px;">
+      <p style="font-size: 18px; margin-bottom: 20px;">Rate your forgiveness level:</p>
+      <input type="range" min="0" max="5" value="0" class="forgiveness-slider" id="forgivenessSlider" oninput="updateHearts(this.value)">
+      <div class="slider-labels">
+        <span>Not Really</span>
+        <span>Maybe</span>
+        <span>Forgiven</span>
+      </div>
+      
+      <div class="heart-meter" id="heartMeter">
+        <span class="heart-icon" data-index="1">❤️</span>
+        <span class="heart-icon" data-index="2">❤️</span>
+        <span class="heart-icon" data-index="3">❤️</span>
+        <span class="heart-icon" data-index="4">❤️</span>
+        <span class="heart-icon" data-index="5">❤️</span>
+      </div>
+    </div>
+
+    <button onclick="submitForgiveness()" style="margin-top: 40px; font-size: 16px; padding: 18px 40px;">
+      💌 SUBMIT MY ANSWER
+    </button>
+
+    <div class="final-message" id="finalMessage">
+      <h2 id="finalTitle" style="margin-bottom: 15px; color: #ff5c8a;">Thank You 💕</h2>
+      <p id="finalText" style="font-size: 16px; line-height: 1.8;"></p>
+      <button onclick="location.reload()" style="margin-top: 20px; background: transparent; border: 2px solid #ff5c8a; color: white;">
+        🔄 START OVER
+      </button>
+    </div>
+  </div>
 
   <script>
     // Sound system
@@ -1028,27 +1108,23 @@ body.rose .sound-toggle:hover {
     function playSound(type) {
       if (!soundEnabled) return;
       
-      try {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        if (type === 'beep') {
-          oscillator.frequency.value = 800;
-          gainNode.gain.value = 0.1;
-          oscillator.start();
-          oscillator.stop(audioContext.currentTime + 0.1);
-        } else if (type === 'success') {
-          oscillator.frequency.value = 1200;
-          gainNode.gain.value = 0.15;
-          oscillator.start();
-          oscillator.stop(audioContext.currentTime + 0.2);
-        }
-      } catch (e) {
-        console.log('Audio not supported');
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      if (type === 'beep') {
+        oscillator.frequency.value = 800;
+        gainNode.gain.value = 0.1;
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.1);
+      } else if (type === 'success') {
+        oscillator.frequency.value = 1200;
+        gainNode.gain.value = 0.15;
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.2);
       }
     }
 
@@ -1070,9 +1146,6 @@ body.rose .sound-toggle:hover {
       playSound('beep');
       document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
       document.getElementById("screen" + num).classList.remove("hidden");
-      
-      // Scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function abort() {
@@ -1105,8 +1178,6 @@ body.rose .sound-toggle:hover {
       ];
 
       const terminal = document.getElementById('terminal');
-      terminal.innerHTML = '<div class="terminal-line"><span class="terminal-prompt">></span> Initializing emotional recovery protocol...</div>';
-      
       messages.forEach((msg, i) => {
         setTimeout(() => {
           const line = document.createElement('div');
@@ -1143,92 +1214,219 @@ body.rose .sound-toggle:hover {
           clearInterval(interval);
           setTimeout(() => {
             document.body.className = 'rose';
-            createFloatingPetals();
+            startFloatingHearts();
+            startRosePetals();
             goTo(6);
           }, 500);
         }
       }, 1000);
     }
 
-    // Floating petals for rose theme
-    let petalInterval;
-    function createFloatingPetals() {
-      if (petalInterval) clearInterval(petalInterval);
-      
-      petalInterval = setInterval(() => {
-        const petal = document.createElement('div');
-        petal.className = 'floating-petal';
-        petal.style.left = Math.random() * 100 + '%';
-        petal.style.animationDuration = (Math.random() * 4 + 4) + 's';
-        petal.style.animationDelay = Math.random() * 2 + 's';
-        document.body.appendChild(petal);
-        
-        setTimeout(() => petal.remove(), 10000);
-      }, 800);
-    }
+    // Initialize
+    createParticles();
 
-    // Enhanced rose opening
-    let roseOpened = false;
-    function openRose() {
-      if (roseOpened) return;
-      roseOpened = true;
+    // Auto-trigger animations
+    const observer = new MutationObserver(() => {
+      const screen4 = document.getElementById('screen4');
+      const screen5 = document.getElementById('screen5');
       
-      playSound('success');
-      const container = document.getElementById('roseContainer');
-      container.classList.add('clicked');
-      
-      setTimeout(() => {
-        document.getElementById('roseFlower').classList.add('open');
-        createSparkles();
-      }, 300);
-      
-      // Show message and button
-      setTimeout(() => {
-        document.getElementById('roseMessage').style.opacity = '1';
-      }, 1500);
-      
-      setTimeout(() => {
-        document.getElementById('continueBtn').style.opacity = '1';
-      }, 2500);
-      
-      // Create confetti for better visual effect
-      for (let i = 0; i < 25; i++) {
-        setTimeout(() => createConfetti(), i * 150);
+      if (screen4 && !screen4.classList.contains('hidden')) {
+        setTimeout(animateTerminal, 500);
       }
-    }
+      
+      if (screen5 && !screen5.classList.contains('hidden')) {
+        setTimeout(startCountdown, 500);
+      }
+    });
 
-    // Sparkles around rose
-    function createSparkles() {
-      const container = document.getElementById('roseContainer');
-      for (let i = 0; i < 15; i++) {
+    observer.observe(document.body, {
+      attributes: true,
+      subtree: true,
+      attributeFilter: ['class']
+    });
+
+    // ========================================
+    //   NEW SCREEN FUNCTIONS
+    // ========================================
+
+    // SCREEN 6: Memory Gallery
+    let revealedCount = 0;
+    function revealMemory(card) {
+      if (card.classList.contains('revealed')) return;
+      
+      card.classList.add('revealed');
+      playSound('success');
+      revealedCount++;
+      
+      if (revealedCount === 9) {
         setTimeout(() => {
-          const sparkle = document.createElement('div');
-          sparkle.className = 'sparkle';
-          sparkle.style.left = (Math.random() * 100) + '%';
-          sparkle.style.top = (Math.random() * 100) + '%';
-          sparkle.style.animationDelay = (Math.random() * 0.5) + 's';
-          container.appendChild(sparkle);
-          
-          setTimeout(() => sparkle.remove(), 2000);
-        }, i * 100);
+          document.getElementById('continueBtn6').style.opacity = '1';
+        }, 500);
       }
     }
 
-    // Envelope opening
-    let envelopeOpened = false;
-    function openEnvelope() {
-      if (envelopeOpened) return;
-      envelopeOpened = true;
+    // SCREEN 7: Constellation
+    let starPositions = [];
+    let connectedStars = 0;
+    let constellationStars = [];
+    let lastConnectedStar = null;
+
+    function initConstellation() {
+      const container = document.getElementById('constellation');
+      starPositions = [
+        { x: 20, y: 30 },
+        { x: 35, y: 15 },
+        { x: 50, y: 25 },
+        { x: 65, y: 15 },
+        { x: 80, y: 30 },
+        { x: 75, y: 50 },
+        { x: 60, y: 65 },
+        { x: 40, y: 65 },
+        { x: 25, y: 50 }
+      ];
+
+      starPositions.forEach((pos, index) => {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = pos.x + '%';
+        star.style.top = pos.y + '%';
+        star.dataset.index = index;
+        star.onclick = () => connectStar(star, index);
+        container.appendChild(star);
+        constellationStars.push(star);
+      });
+    }
+
+    function connectStar(star, index) {
+      // If this star is already connected, ignore
+      if (star.classList.contains('connected')) return;
+      
+      star.classList.add('connected');
+      playSound('success');
+      
+      // If this is not the first star, draw a line from the last connected star
+      if (lastConnectedStar !== null) {
+        drawLine(lastConnectedStar, star);
+      }
+      
+      lastConnectedStar = star;
+      connectedStars++;
+      
+      // When all stars are connected, show the message
+      if (connectedStars === starPositions.length) {
+        setTimeout(() => {
+          document.getElementById('constellationMessage').classList.add('show');
+          setTimeout(() => {
+            document.getElementById('continueBtn7').style.opacity = '1';
+          }, 1000);
+        }, 500);
+      }
+    }
+
+    function drawLine(star1, star2) {
+      const container = document.getElementById('constellation');
+      const rect1 = star1.getBoundingClientRect();
+      const rect2 = star2.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      
+      const x1 = rect1.left - containerRect.left + rect1.width / 2;
+      const y1 = rect1.top - containerRect.top + rect1.height / 2;
+      const x2 = rect2.left - containerRect.left + rect2.width / 2;
+      const y2 = rect2.top - containerRect.top + rect2.height / 2;
+      
+      const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+      const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+      
+      const line = document.createElement('div');
+      line.className = 'constellation-line';
+      line.style.width = length + 'px';
+      line.style.left = x1 + 'px';
+      line.style.top = y1 + 'px';
+      line.style.transform = `rotate(${angle}deg)`;
+      
+      container.appendChild(line);
+    }
+
+    // SCREEN 9: Forgiveness Scale
+    let selectedMood = 0;
+    
+    function selectMood(button, moodLevel) {
+      document.querySelectorAll('.mood-button').forEach(b => b.classList.remove('selected'));
+      button.classList.add('selected');
+      selectedMood = moodLevel;
+      playSound('success');
+    }
+
+    function updateHearts(value) {
+      const hearts = document.querySelectorAll('.heart-icon');
+      hearts.forEach((heart, index) => {
+        if (index < value) {
+          heart.classList.add('filled');
+        } else {
+          heart.classList.remove('filled');
+        }
+      });
+    }
+
+    function submitForgiveness() {
+      const sliderValue = document.getElementById('forgivenessSlider').value;
+      const finalMessage = document.getElementById('finalMessage');
+      const finalTitle = document.getElementById('finalTitle');
+      const finalText = document.getElementById('finalText');
+      
+      let message = '';
+      let title = '';
+      
+      if (selectedMood === 0 || sliderValue < 2) {
+        title = '💔 I Understand';
+        message = "I respect your feelings. I really do.<br>I know I hurt you, and that's not something I can just erase.<br>But I want you to know: <strong>I'm genuinely sorry</strong>, and I'm here whenever you're ready to talk.<br>Take all the time you need. 💙";
+      } else if (sliderValue < 4) {
+        title = '🌱 There\'s Hope';
+        message = "Thank you for considering it.<br>I know I don't deserve it right away, but I promise to do better.<br>Let me prove to you that <strong>I can change</strong>.<br>One step at a time. 💛";
+      } else {
+        title = '🎉 Thank You! 🎉';
+        message = "I can't believe it... Thank you so much! 😭<br>I promise I won't let you down again.<br>You're giving me a second chance and <strong>I'm going to make it count</strong>.<br>Here's to new beginnings! 💕";
+        createConfetti();
+        createFireworks();
+      }
+      
+      finalTitle.innerHTML = title;
+      finalText.innerHTML = message;
+      finalMessage.classList.add('show');
       
       playSound('success');
-      document.getElementById('envelope').classList.add('open');
-      
-      setTimeout(() => {
-        document.getElementById('confessionText').style.opacity = '1';
-      }, 800);
+    }
+
+    // Confetti
+    function createConfetti() {
+      const colors = ['#ff5c8a', '#ff3f75', '#ffd700', '#4ade80', '#60a5fa'];
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+          confetti.style.animationDelay = (Math.random() * 0.5) + 's';
+          document.body.appendChild(confetti);
+          
+          setTimeout(() => confetti.remove(), 4000);
+        }, i * 30);
+      }
     }
 
     // Fireworks
+    function createFireworks() {
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          createFirework(
+            Math.random() * window.innerWidth,
+            Math.random() * window.innerHeight
+          );
+        }, i * 400);
+      }
+    }
+
     function createFirework(x, y) {
       const colors = ['#ff5c8a', '#ff3f75', '#ffd700', '#ff82a8', '#60a5fa'];
       const firework = document.createElement('div');
@@ -1253,87 +1451,49 @@ body.rose .sound-toggle:hover {
       setTimeout(() => firework.remove(), 1000);
     }
 
-    // Response handlers
-    function forgiven() {
-      playSound('success');
-      createConfetti();
-      setTimeout(() => goTo(9), 500);
+    // Floating hearts
+    function startFloatingHearts() {
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.textContent = '💕';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.bottom = '0';
+        heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        document.body.appendChild(heart);
+        
+        setTimeout(() => heart.remove(), 5000);
+      }, 1500);
     }
 
-    function progress() {
-      playSound('success');
-      createConfetti();
-      setTimeout(() => goTo(9), 500);
+    // Rose petals
+    function startRosePetals() {
+      setInterval(() => {
+        const petal = document.createElement('div');
+        petal.className = 'rose-petal';
+        petal.style.left = Math.random() * 100 + '%';
+        petal.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        document.body.appendChild(petal);
+        
+        setTimeout(() => petal.remove(), 8000);
+      }, 1000);
     }
 
-    function tryHarder() {
-      alert("Challenge accepted! I'll try harder next time. 💪");
-      playSound('beep');
-      setTimeout(() => goTo(9), 500);
-    }
-
-    // Celebration
-    function celebrateMore() {
-      playSound('success');
-      createConfetti();
-      
-      // Random fireworks
-      for (let i = 0; i < 5; i++) {
-        setTimeout(() => {
-          createFirework(
-            Math.random() * window.innerWidth,
-            Math.random() * window.innerHeight
-          );
-        }, i * 300);
-      }
-      
-      alert("🎉 YAY! You're the best! Thank you for giving me another chance! 💕");
-    }
-
-    // Confetti
-    function createConfetti() {
-      const colors = ['#ff5c8a', '#ff3f75', '#ffd700', '#4ade80', '#60a5fa'];
-      for (let i = 0; i < 50; i++) {
-        setTimeout(() => {
-          const confetti = document.createElement('div');
-          confetti.className = 'confetti';
-          confetti.style.left = Math.random() * 100 + '%';
-          confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-          confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-          confetti.style.animationDelay = (Math.random() * 0.5) + 's';
-          document.body.appendChild(confetti);
-          
-          setTimeout(() => confetti.remove(), 4000);
-        }, i * 30);
-      }
-    }
-
-    // Initialize
-    document.addEventListener("DOMContentLoaded", () => {
-      createParticles();
-      goTo(1);
-    });
-
-    // Auto-trigger animations when reaching certain screens
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.target.id === 'screen4' && !mutation.target.classList.contains('hidden')) {
-          setTimeout(animateTerminal, 500);
-        }
-        if (mutation.target.id === 'screen5' && !mutation.target.classList.contains('hidden')) {
-          setTimeout(startCountdown, 500);
+    // Initialize constellation when screen 7 is shown
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new MutationObserver(() => {
+        const screen7 = document.getElementById('screen7');
+        if (screen7 && !screen7.classList.contains('hidden') && constellationStars.length === 0) {
+          setTimeout(initConstellation, 300);
         }
       });
-    });
-
-    // Observe all screens
-    document.querySelectorAll('.screen').forEach(screen => {
-      observer.observe(screen, {
+      
+      observer.observe(document.body, {
         attributes: true,
+        subtree: true,
         attributeFilter: ['class']
       });
     });
   </script>
-
 </body>
 </html>
