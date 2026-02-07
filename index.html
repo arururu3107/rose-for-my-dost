@@ -1,93 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>An Extremely Serious Website</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Confidential</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
+    /* ---------- RESET ---------- */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #ffe6ec, #fff7f0);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      text-align: center;
+      transition: background 1s ease, color 1s ease, font-family 1s ease;
     }
 
     .screen {
-      max-width: 360px;
-      padding: 24px;
-    }
-
-    h1 {
-      font-size: 26px;
-      margin-bottom: 12px;
-    }
-
-    p {
-      font-size: 16px;
-      line-height: 1.4;
-    }
-
-    button {
-      background: #ff5c8a;
-      color: white;
-      border: none;
-      padding: 12px 18px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-size: 15px;
-      margin-top: 16px;
+      max-width: 420px;
+      padding: 28px;
+      text-align: center;
+      animation: fadeIn 0.6s ease;
     }
 
     .hidden {
       display: none;
     }
 
-    /* Rose */
+    h1 {
+      margin-bottom: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    button {
+      margin-top: 22px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- DARK / MYSTERY THEME ---------- */
+    body.dark {
+      background: radial-gradient(circle at top, #14141c 0%, #050508 60%);
+      color: #e6e6eb;
+      font-family: "Courier New", monospace;
+    }
+
+    body.dark button {
+      background: transparent;
+      color: #ff5f5f;
+      border: 1px solid #ff5f5f;
+    }
+
+    body.dark button:hover {
+      background: rgba(255, 95, 95, 0.1);
+    }
+
+    .stamp {
+      display: inline-block;
+      padding: 4px 10px;
+      border: 1px solid #ff5f5f;
+      color: #ff5f5f;
+      font-size: 12px;
+      margin-bottom: 14px;
+      transform: rotate(-6deg);
+      opacity: 0.8;
+    }
+
+    .loader {
+      margin-top: 18px;
+      font-size: 13px;
+      animation: flicker 1.4s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* ---------- ROSE / LOVE THEME ---------- */
+    body.rose {
+      background: linear-gradient(135deg, #ffe6ec, #fff2f6);
+      color: #2a2a2a;
+      font-family: Georgia, serif;
+    }
+
+    body.rose button {
+      background: #ff5c8a;
+      color: white;
+      border: none;
+    }
+
+    body.rose button:hover {
+      background: #ff3f75;
+    }
+
+    /* ---------- ROSE ---------- */
     .rose {
-      width: 120px;
-      height: 120px;
-      margin: 20px auto;
+      width: 140px;
+      height: 140px;
+      margin: 22px auto;
       position: relative;
       cursor: pointer;
     }
 
     .petal {
       position: absolute;
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
       background: #ff5c8a;
       border-radius: 50%;
-      top: 30px;
-      left: 30px;
-      transition: transform 0.6s ease;
+      top: 35px;
+      left: 35px;
+      transition: transform 0.8s ease;
     }
-
-    .rose.open .p1 { transform: translate(-22px, -22px); }
-    .rose.open .p2 { transform: translate(22px, -22px); }
-    .rose.open .p3 { transform: translate(0, 24px); }
 
     .p2 { transform: rotate(45deg); }
     .p3 { transform: rotate(-45deg); }
+
+    .rose.open .p1 { transform: translate(-26px, -26px); }
+    .rose.open .p2 { transform: translate(26px, -26px); }
+    .rose.open .p3 { transform: translate(0, 30px); }
+
+    footer {
+      margin-top: 30px;
+      font-size: 12px;
+      opacity: 0.6;
+    }
   </style>
 </head>
 
-<body>
+<body class="dark">
 
   <!-- SCREEN 1 -->
   <div class="screen" id="screen1">
-    <h1>🚨 BREAKING NEWS</h1>
-    <p>Local best friend is mad.<br>Immediate action required.</p>
-    <button onclick="goTo(2)">Investigate</button>
+    <div class="stamp">CONFIDENTIAL</div>
+    <h1>ACCESSING RESTRICTED FILE</h1>
+    <p>
+      If you’re reading this,<br>
+      you weren’t supposed to find it.
+    </p>
+    <button onclick="goTo(2)">PROCEED ANYWAY</button>
   </div>
 
   <!-- SCREEN 2 -->
   <div class="screen hidden" id="screen2">
-    <h1>CASE FILE #0214</h1>
+    <div class="stamp">CASE FILE #0214</div>
+    <p>
+      SUBJECT: You<br>
+      STATUS: Emotionally significant<br>
+      RISK LEVEL: High
+    </p>
+    <button onclick="goTo(3)">OPEN FILE</button>
+  </div>
+
+  <!-- SCREEN 3 -->
+  <div class="screen hidden" id="screen3">
+    <h1>ANALYSING DAMAGE</h1>
+    <p class="loader">Attempting recovery…</p>
+    <button onclick="goToRose()">OVERRIDE SYSTEM</button>
+  </div>
+
+  <!-- SCREEN 4 (ROSE DAY) -->
+  <div class="screen hidden" id="screen4">
+    <h1>🌹</h1>
 
     <div class="rose" onclick="openRose()">
       <div class="petal p1"></div>
@@ -96,29 +195,20 @@
     </div>
 
     <p>
-      <strong>Suspect:</strong> Me<br>
-      <strong>Victim:</strong> You (iconic)<br>
-      <strong>Crime:</strong> Existing incorrectly<br>
-      <strong>Status:</strong> Regretful
+      I panicked and got you a digital rose.<br>
+      But the feelings are annoyingly real.
     </p>
 
-    <button onclick="goTo(3)">View Evidence</button>
+    <button onclick="goTo(5)">CONTINUE</button>
   </div>
 
-  <!-- SCREEN 3 -->
-  <div class="screen hidden" id="screen3">
-    <h1>Scientific Findings 🧪</h1>
-    <p id="loading">Calculating forgiveness probability…</p>
-    <button onclick="goTo(4)">Continue</button>
-  </div>
-
-  <!-- SCREEN 4 -->
-  <div class="screen hidden" id="screen4">
-    <h1>🌹 Rose Day Verdict</h1>
+  <!-- SCREEN 5 -->
+  <div class="screen hidden" id="screen5">
+    <h1>Okay. No jokes now.</h1>
     <p>
-      Okay but seriously.<br>
       I know I messed up.<br>
-      I miss normal us.
+      I don’t want to explain or defend.<br>
+      I just miss us.
     </p>
 
     <button onclick="alert('I knew this would work 😌')">
@@ -126,24 +216,28 @@
     </button>
 
     <button onclick="alert('Still counts as progress')">
-      Still mad but this was cute
+      Still mad but smiling
     </button>
+
+    <footer>
+      made with effort, nerves, and a lot of care
+    </footer>
   </div>
 
   <script>
     function goTo(num) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-      document.getElementById('screen' + num).classList.remove('hidden');
+      document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
+      document.getElementById("screen" + num).classList.remove("hidden");
+    }
+
+    function goToRose() {
+      document.body.className = "rose";
+      goTo(4);
     }
 
     function openRose() {
-      document.querySelector('.rose').classList.add('open');
+      document.querySelector(".rose").classList.add("open");
     }
-
-    setTimeout(() => {
-      const el = document.getElementById('loading');
-      if (el) el.innerText = "Result: You’re too cute to stay mad 😌";
-    }, 2000);
   </script>
 
 </body>
