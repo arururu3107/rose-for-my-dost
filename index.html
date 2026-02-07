@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>An Extremely Serious Website 🌹</title>
+  <title>An Extremely Serious Website</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       margin: 0;
       height: 100vh;
+      background: linear-gradient(135deg, #ffe6ec, #fff7f0);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #ffe6ec, #fff7f0);
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       text-align: center;
     }
 
@@ -23,17 +23,23 @@
     }
 
     h1 {
-      font-size: 24px;
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.4;
     }
 
     button {
       background: #ff5c8a;
       color: white;
       border: none;
-      padding: 12px 20px;
+      padding: 12px 18px;
       border-radius: 999px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 15px;
       margin-top: 16px;
     }
 
@@ -43,10 +49,10 @@
 
     /* Rose */
     .rose {
-      position: relative;
       width: 120px;
       height: 120px;
       margin: 20px auto;
+      position: relative;
       cursor: pointer;
     }
 
@@ -61,11 +67,10 @@
       transition: transform 0.6s ease;
     }
 
-    .rose.open .p1 { transform: translate(-20px, -20px); }
-    .rose.open .p2 { transform: translate(20px, -20px); }
-    .rose.open .p3 { transform: translate(0, 20px); }
+    .rose.open .p1 { transform: translate(-22px, -22px); }
+    .rose.open .p2 { transform: translate(22px, -22px); }
+    .rose.open .p3 { transform: translate(0, 24px); }
 
-    .p1 {}
     .p2 { transform: rotate(45deg); }
     .p3 { transform: rotate(-45deg); }
   </style>
@@ -77,7 +82,7 @@
   <div class="screen" id="screen1">
     <h1>🚨 BREAKING NEWS</h1>
     <p>Local best friend is mad.<br>Immediate action required.</p>
-    <button onclick="nextScreen()">Investigate</button>
+    <button onclick="goTo(2)">Investigate</button>
   </div>
 
   <!-- SCREEN 2 -->
@@ -90,50 +95,55 @@
       <div class="petal p3"></div>
     </div>
 
-    <p>Suspect: Me<br>Victim: You (iconic)<br>Crime: Being dumb</p>
-    <button onclick="showEvidence()">View Evidence</button>
+    <p>
+      <strong>Suspect:</strong> Me<br>
+      <strong>Victim:</strong> You (iconic)<br>
+      <strong>Crime:</strong> Existing incorrectly<br>
+      <strong>Status:</strong> Regretful
+    </p>
+
+    <button onclick="goTo(3)">View Evidence</button>
   </div>
 
   <!-- SCREEN 3 -->
   <div class="screen hidden" id="screen3">
     <h1>Scientific Findings 🧪</h1>
-    <p id="result">Calculating forgiveness probability…</p>
-    <button onclick="finalScreen()">Continue</button>
+    <p id="loading">Calculating forgiveness probability…</p>
+    <button onclick="goTo(4)">Continue</button>
   </div>
 
   <!-- SCREEN 4 -->
   <div class="screen hidden" id="screen4">
     <h1>🌹 Rose Day Verdict</h1>
-    <p>I know I messed up.<br>I miss normal us.</p>
+    <p>
+      Okay but seriously.<br>
+      I know I messed up.<br>
+      I miss normal us.
+    </p>
 
-    <button onclick="alert('I knew it 😌')">Fine, you’re forgiven</button>
-    <button onclick="alert('I still count this as a win')">Still mad but cute</button>
+    <button onclick="alert('I knew this would work 😌')">
+      Fine. You’re forgiven
+    </button>
+
+    <button onclick="alert('Still counts as progress')">
+      Still mad but this was cute
+    </button>
   </div>
 
   <script>
-    function nextScreen() {
-      screen1.classList.add("hidden");
-      screen2.classList.remove("hidden");
+    function goTo(num) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+      document.getElementById('screen' + num).classList.remove('hidden');
     }
 
     function openRose() {
-      document.querySelector(".rose").classList.add("open");
+      document.querySelector('.rose').classList.add('open');
     }
 
-    function showEvidence() {
-      screen2.classList.add("hidden");
-      screen3.classList.remove("hidden");
-
-      setTimeout(() => {
-        document.getElementById("result").innerText =
-          "Result: You’re too cute to stay mad 😌";
-      }, 2000);
-    }
-
-    function finalScreen() {
-      screen3.classList.add("hidden");
-      screen4.classList.remove("hidden");
-    }
+    setTimeout(() => {
+      const el = document.getElementById('loading');
+      if (el) el.innerText = "Result: You’re too cute to stay mad 😌";
+    }, 2000);
   </script>
 
 </body>
