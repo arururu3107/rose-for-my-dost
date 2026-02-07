@@ -296,24 +296,23 @@
     }
 
     body.rose .screen {
-      background: transparent;
-      backdrop-filter: none;
-      box-shadow: none;
-    }
-
-    body.rose .love-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 245, 250, 0.95));
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 20px 60px rgba(255, 92, 138, 0.2);
+      border: 1px solid rgba(255, 92, 138, 0.1);
     }
 
     body.rose button {
       background: linear-gradient(135deg, #ff5c8a, #ff3f75);
       color: white;
       border: none;
+      box-shadow: 0 4px 15px rgba(255, 92, 138, 0.3);
     }
 
     body.rose button:hover {
       background: linear-gradient(135deg, #ff3f75, #ff1f5f);
-      transform: translateY(-3px) scale(1.05);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(255, 92, 138, 0.5);
     }
 
     /* ---------- FLOATING PETALS BACKGROUND ---------- */
@@ -471,7 +470,7 @@
 
     /* ---------- LOVE MESSAGE CARD ---------- */
     .love-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 245, 250, 0.9));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 245, 250, 0.95));
       padding: 30px;
       border-radius: 20px;
       margin: 25px 0;
@@ -479,6 +478,12 @@
       border: 2px solid rgba(255, 92, 138, 0.3);
       position: relative;
       overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .love-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(255, 92, 138, 0.4);
     }
 
     .love-card::before {
@@ -507,368 +512,360 @@
     }
 
     /* ---------- CHOICE CARDS ---------- */
-    .choice-card {
-      background: linear-gradient(135deg, #ffffff, #fff5f8);
-      padding: 20px;
-      border-radius: 15px;
-      margin: 15px 0;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-    }
+  .choice-card {
+  background: linear-gradient(135deg, #ffffff, #fff5f8);
+  padding: 20px;
+  border-radius: 15px;
+  margin: 15px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 5px 15px rgba(255, 92, 138, 0.1);
+}
 
-    .choice-card:hover {
-      border-color: #ff5c8a;
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(255, 92, 138, 0.3);
-    }
+.choice-card:hover {
+  border-color: #ff5c8a;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 92, 138, 0.3);
+}
 
-    /* ---------- ANIMATED ENVELOPE ---------- */
-    .envelope {
-      width: 100px;
-      height: 70px;
-      position: relative;
-      margin: 20px auto;
-      cursor: pointer;
-    }
+.choice-card.selected {
+  border-color: #ff3f75;
+  background: linear-gradient(135deg, #fff0f5, #ffe6ec);
+  transform: scale(1.02);
+}
 
-    .envelope-flap {
-      width: 0;
-      height: 0;
-      border-left: 50px solid transparent;
-      border-right: 50px solid transparent;
-      border-top: 35px solid #ff5c8a;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform-origin: top;
-      transition: transform 0.6s ease;
-    }
+/* ---------- ANIMATED ENVELOPE ---------- */
+.envelope {
+  width: 100px;
+  height: 70px;
+  position: relative;
+  margin: 20px auto;
+  cursor: pointer;
+}
 
-    .envelope-body {
-      width: 100px;
-      height: 70px;
-      background: #ff82a8;
-      position: absolute;
-      top: 0;
-      border-radius: 0 0 5px 5px;
-    }
+.envelope-flap {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 35px solid #ff5c8a;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top;
+  transition: transform 0.6s ease;
+}
 
-    .envelope.open .envelope-flap {
-      transform: rotateX(180deg);
-    }
+.envelope-body {
+  width: 100px;
+  height: 70px;
+  background: #ff82a8;
+  position: absolute;
+  top: 0;
+  border-radius: 0 0 5px 5px;
+}
 
-    .letter {
-      width: 80px;
-      height: 50px;
-      background: white;
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      border-radius: 3px;
-      transition: transform 0.6s ease;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+}
 
-    .envelope.open .letter {
-      transform: translateY(-40px);
-    }
+.letter {
+  width: 80px;
+  height: 50px;
+  background: white;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border-radius: 3px;
+  transition: transform 0.6s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
 
-    /* ---------- FIREWORKS ---------- */
-    .firework {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-    }
+.envelope.open .letter {
+  transform: translateY(-40px);
+}
 
-    .firework-particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      animation: fireworkExplosion 1s ease-out forwards;
-    }
+/* ---------- FIREWORKS ---------- */
+.firework {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+}
 
-    @keyframes fireworkExplosion {
-      0% {
-        transform: translate(0, 0);
-        opacity: 1;
-      }
-      100% {
-        transform: translate(var(--tx), var(--ty));
-        opacity: 0;
-      }
-    }
+.firework-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  animation: fireworkExplosion 1s ease-out forwards;
+}
 
-    /* ---------- SCANLINE EFFECT ---------- */
-    .scanline {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        to bottom,
-        transparent 50%,
-        rgba(255, 95, 95, 0.03) 50%
-      );
-      background-size: 100% 4px;
-      animation: scan 8s linear infinite;
-      pointer-events: none;
-      z-index: 999;
-    }
+@keyframes fireworkExplosion {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty));
+    opacity: 0;
+  }
+}
 
-    @keyframes scan {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(100%); }
-    }
+/* ---------- SCANLINE EFFECT ---------- */
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(255, 95, 95, 0.03) 50%
+  );
+  background-size: 100% 4px;
+  animation: scan 8s linear infinite;
+  pointer-events: none;
+  z-index: 999;
+}
 
-    /* ---------- DOSSIER STYLE ---------- */
-    .dossier {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      border-radius: 8px;
-      margin: 20px 0;
-      border-left: 4px solid #ff5f5f;
-    }
+@keyframes scan {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
 
-    .dossier-item {
-      display: flex;
-      justify-content: space-between;
-      margin: 12px 0;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255, 95, 95, 0.2);
-    }
+/* ---------- DOSSIER STYLE ---------- */
+.dossier {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  border-left: 4px solid #ff5f5f;
+}
 
-    .dossier-label {
-      font-weight: 700;
-      color: #ff5f5f;
-      text-transform: uppercase;
-      font-size: 12px;
-      letter-spacing: 1px;
-    }
+.dossier-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 95, 95, 0.2);
+}
 
-    .dossier-value {
-      color: #e6e6eb;
-      font-size: 14px;
-      text-align: right;
-    }
+.dossier-label {
+  font-weight: 700;
+  color: #ff5f5f;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
 
-    /* ---------- COUNTDOWN ---------- */
-    .countdown {
-      font-size: 48px;
-      font-weight: 700;
-      color: #ff5f5f;
-      margin: 20px 0;
-      font-family: "Courier New", monospace;
-      text-shadow: 0 0 20px rgba(255, 95, 95, 0.5);
-    }
+.dossier-value {
+  color: #e6e6eb;
+  font-size: 14px;
+  text-align: right;
+}
 
-    /* ---------- FOOTER ---------- */
-    footer {
-      margin-top: 30px;
-      font-size: 11px;
-      opacity: 0.5;
-      font-style: italic;
-    }
+/* ---------- COUNTDOWN ---------- */
+.countdown {
+  font-size: 48px;
+  font-weight: 700;
+  color: #ff5f5f;
+  margin: 20px 0;
+  font-family: "Courier New", monospace;
+  text-shadow: 0 0 20px rgba(255, 95, 95, 0.5);
+}
 
-    /* ---------- SOUND TOGGLE ---------- */
-    .sound-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(255, 95, 95, 0.2);
-      border: 2px solid #ff5f5f;
-      color: #ff5f5f;
-      padding: 10px 15px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 12px;
-      z-index: 1000;
-      transition: all 0.3s ease;
-    }
+/* ---------- FOOTER ---------- */
+footer {
+  margin-top: 30px;
+  font-size: 11px;
+  opacity: 0.5;
+  font-style: italic;
+}
 
-    body.rose .sound-toggle {
-      background: rgba(255, 92, 138, 0.2);
-      border-color: #ff5c8a;
-      color: #ff5c8a;
-    }
+/* ---------- SOUND TOGGLE ---------- */
+.sound-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 95, 95, 0.2);
+  border: 2px solid #ff5f5f;
+  color: #ff5f5f;
+  padding: 10px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 12px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
 
-    .sound-toggle:hover {
-      background: rgba(255, 95, 95, 0.4);
-    }
+body.rose .sound-toggle {
+  background: rgba(255, 92, 138, 0.2);
+  border-color: #ff5c8a;
+  color: #ff5c8a;
+}
 
-    body.rose .sound-toggle:hover {
-      background: rgba(255, 92, 138, 0.4);
-    }
+.sound-toggle:hover {
+  background: rgba(255, 95, 95, 0.4);
+}
 
-    /* ---------- CONFETTI ---------- */
-    .confetti {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      top: -10px;
-      animation: confettiFall 3s linear forwards;
-      pointer-events: none;
-      z-index: 9999;
-    }
+body.rose .sound-toggle:hover {
+  background: rgba(255, 92, 138, 0.4);
+}
 
-    @keyframes confettiFall {
-      to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
+/* ---------- CONFETTI ---------- */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: confettiFall 3s linear forwards;
+  pointer-events: none;
+  z-index: 9999;
+}
 
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 22px;
-      }
-      
-      .screen {
-        padding: 30px 20px;
-      }
-      
-      button {
-        padding: 12px 20px;
-        font-size: 12px;
-      }
-      
-      .love-card {
-        padding: 20px;
-      }
-      
-      .countdown {
-        font-size: 36px;
-      }
-      
-      .rose-container {
-        width: 150px;
-        height: 180px;
-      }
-    }
-  </style>
-</head>
+@keyframes confettiFall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
 
-<body class="dark">
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 22px;
+  }
+  
+  .screen {
+    padding: 30px 20px;
+  }
+  
+  button {
+    padding: 12px 20px;
+    font-size: 12px;
+  }
+  
+  .love-card {
+    padding: 20px;
+  }
+  
+  .countdown {
+    font-size: 36px;
+  }
+  
+  .rose-container {
+    width: 150px;
+    height: 180px;
+  }
+}
+    <!-- SCANLINE EFFECT -->
+<div class="scanline"></div>
 
-  <!-- SCANLINE EFFECT -->
-  <div class="scanline"></div>
+<!-- SOUND TOGGLE -->
+<div class="sound-toggle" onclick="toggleSound()">
+  🔇 <span id="soundStatus">Enable Sound</span>
+</div>
 
-  <!-- SOUND TOGGLE -->
-  <div class="sound-toggle" onclick="toggleSound()">
-    🔇 <span id="soundStatus">Enable Sound</span>
+<!-- PARTICLES -->
+<div class="particles" id="particles"></div>
+
+<!-- SCREEN 1: WARNING -->
+<div class="screen" id="screen1">
+  <div class="stamp glitch">⚠ TOP SECRET ⚠</div>
+  <h1 class="typing">RESTRICTED FILE</h1>
+  <p style="margin-top: 30px;">
+    ⚠️ <strong>WARNING:</strong> Unauthorized access detected<br>
+    <span style="color: #ff5f5f;">Classification Level: PERSONAL</span><br>
+    <span style="opacity: 0.7;">If you're reading this, you weren't supposed to find it...jkjk</span>
+  </p>
+  <button onclick="goTo(2)">🔓 PROCEED ANYWAY</button>
+  <button onclick="abort()" style="opacity: 0.6;">❌ ABORT MISSION</button>
+</div>
+
+<!-- SCREEN 2: PASSWORD -->
+<div class="screen hidden" id="screen2">
+  <div class="stamp">🔐 SECURITY CHECKPOINT</div>
+  <h1>IDENTITY VERIFICATION REQUIRED</h1>
+  <p>Enter my laptop/ipad/smol phone ka password<br>(Format: DDMM)</p>
+  
+  <div class="password-container">
+    <input type="password" id="passwordInput" maxlength="4" placeholder="••••" 
+           onkeypress="if(event.key==='Enter') checkPassword()">
   </div>
+  
+  <button onclick="checkPassword()">🔑 VERIFY</button>
+  <p class="hint">💡 No hint if you dk your own bday then what can I say</p>
+  <p class="hint" style="color: #ff5f5f; margin-top: 15px;">
+    (Just kidding, any 4 digits work. But points for trying! 😏)
+  </p>
+</div>
 
-  <!-- PARTICLES -->
-  <div class="particles" id="particles"></div>
-
-  <!-- SCREEN 1: WARNING -->
-  <div class="screen" id="screen1">
-    <div class="stamp glitch">⚠ TOP SECRET ⚠</div>
-    <h1 class="typing">RESTRICTED FILE</h1>
-    <p style="margin-top: 30px;">
-      ⚠️ <strong>WARNING:</strong> Unauthorized access detected<br>
-      <span style="color: #ff5f5f;">Classification Level: PERSONAL</span><br>
-      <span style="opacity: 0.7;">If you're reading this, you weren't supposed to find it...jkjk</span>
-    </p>
-    <button onclick="goTo(2)">🔓 PROCEED ANYWAY</button>
-    <button onclick="abort()" style="opacity: 0.6;">❌ ABORT MISSION</button>
-  </div>
-
-  <!-- SCREEN 2: PASSWORD -->
-  <div class="screen hidden" id="screen2">
-    <div class="stamp">🔐 SECURITY CHECKPOINT</div>
-    <h1>IDENTITY VERIFICATION REQUIRED</h1>
-    <p>Enter my laptop/ipad/smol phone ka password<br>(Format: DDMM)</p>
-    
-    <div class="password-container">
-      <input type="password" id="passwordInput" maxlength="4" placeholder="••••" 
-             onkeypress="if(event.key==='Enter') checkPassword()">
+<!-- SCREEN 3: DOSSIER -->
+<div class="screen hidden" id="screen3">
+  <div class="stamp">📂 CASE FILE #0214</div>
+  <h1>SUBJECT PROFILE</h1>
+  
+  <div class="dossier">
+    <div class="dossier-item">
+      <span class="dossier-label">Suspect:</span>
+      <span class="dossier-value">Me (unfortunately)</span>
     </div>
-    
-    <button onclick="checkPassword()">🔑 VERIFY</button>
-    <p class="hint">💡 No hint if you dk your own bday then what can I say</p>
-    <p class="hint" style="color: #ff5f5f; margin-top: 15px;">
-      (Just kidding, any 4 digits work. But points for trying! 😏)
-    </p>
+    <div class="dossier-item">
+      <span class="dossier-label">Subject:</span>
+      <span class="dossier-value">You</span>
+    </div>
+    <div class="dossier-item">
+      <span class="dossier-label">Status:</span>
+      <span class="dossier-value">My Fav Person</span>
+    </div>
+    <div class="dossier-item">
+      <span class="dossier-label">Threat Level:</span>
+      <span class="dossier-value">CRITICAL (to my heart)</span>
+    </div>
+    <div class="dossier-item">
+      <span class="dossier-label">Last Contact:</span>
+      <span class="dossier-value">Today but proper contact was wayyyy too long ago</span>
+    </div>
+    <div class="dossier-item">
+      <span class="dossier-label">Apology Status:</span>
+      <span class="dossier-value">⏳ Pending :(</span>
+    </div>
   </div>
 
-  <!-- SCREEN 3: DOSSIER -->
-  <div class="screen hidden" id="screen3">
-    <div class="stamp">📂 CASE FILE #0214</div>
-    <h1>SUBJECT PROFILE</h1>
-    
-    <div class="dossier">
-      <div class="dossier-item">
-        <span class="dossier-label">Suspect:</span>
-        <span class="dossier-value">Me (unfortunately)</span>
-      </div>
-      <div class="dossier-item">
-        <span class="dossier-label">Subject:</span>
-        <span class="dossier-value">You</span>
-      </div>
-      <div class="dossier-item">
-        <span class="dossier-label">Status:</span>
-        <span class="dossier-value">My Fav Person</span>
-      </div>
-      <div class="dossier-item">
-        <span class="dossier-label">Threat Level:</span>
-        <span class="dossier-value">CRITICAL (to my heart)</span>
-      </div>
-      <div class="dossier-item">
-        <span class="dossier-label">Last Contact:</span>
-        <span class="dossier-value">Today but proper contact was wayyyy too long ago</span>
-      </div>
-      <div class="dossier-item">
-        <span class="dossier-label">Apology Status:</span>
-        <span class="dossier-value">⏳ Pending :(</span>
-      </div>
-    </div>
+  <button onclick="goTo(4)">📖 OPEN FULL FILE</button>
+</div>
 
-    <button onclick="goTo(4)">📖 OPEN FULL FILE</button>
+<!-- SCREEN 4: ANALYSIS -->
+<div class="screen hidden" id="screen4">
+  <h1>SYSTEM DIAGNOSTICS</h1>
+  
+  <div class="terminal" id="terminal">
+    <div class="terminal-line"><span class="terminal-prompt">></span> Initializing emotional recovery protocol...</div>
   </div>
-
-  <!-- SCREEN 4: ANALYSIS -->
-  <div class="screen hidden" id="screen4">
-    <h1>SYSTEM DIAGNOSTICS</h1>
-    
-    <div class="terminal" id="terminal">
-      <div class="terminal-line"><span class="terminal-prompt">></span> Initializing emotional recovery protocol...</div>
-    </div>
-    
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
-    
-    <p class="loader">⚙️ Analyzing damage... Please wait...</p>
-    <button onclick="skipAnalysis()" style="opacity: 0.7; font-size: 11px; margin-top: 20px;">
-      SKIP ANALYSIS (Impatient, I see 😏)
-    </button>
+  
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
   </div>
+  
+  <p class="loader">⚙️ Analyzing damage... Please wait...</p>
+  <button onclick="skipAnalysis()" style="opacity: 0.7; font-size: 11px; margin-top: 20px;">
+    SKIP ANALYSIS (Impatient, I see 😏)
+  </button>
+</div>
 
 <!-- SCREEN 5: COUNTDOWN -->
+<div class="screen hidden" id="screen5">
+  <div class="stamp">⏱️ CRITICAL MOMENT</div>
+  <h1>SYSTEM OVERRIDE IN</h1>
+  
+  <div class="countdown" id="countdown">3</div>
+  
+  <p>Prepare for emotional content...</p>
+</div>
 
-  <div class="screen hidden" id="screen5">
-
-    <div class="stamp">⏱️ CRITICAL MOMENT</div>
-
-    <h1>SYSTEM OVERRIDE IN</h1>
-
-    
-
-    <div class="countdown" id="countdown">3</div>
-
-    
-
-    <p>Prepare for emotional content...</p>
-
-  </div>
-
-
-
- <!-- SCREEN 6: ROSE REVEAL -->
+<!-- SCREEN 6: ROSE REVEAL -->
 <div class="screen hidden" id="screen6">
   <h1>🌹 HAPPY ROSE DAY 🌹</h1>
   
@@ -997,7 +994,7 @@
     <p style="font-size: 15px; line-height: 2; text-align: left;">
       <strong style="color: #ff3f75;">I promise to:</strong><br>
       <span class="pulse-heart">💖</span> Be less of an idiot<br>
-      <span class="pulse-heart">💖</span> Communicate way better<br>
+          <span class="pulse-heart">💖</span> Communicate way better<br>
       <span class="pulse-heart">💖</span> Make you more digital roses (if needed)<br>
       <span class="pulse-heart">💖</span> Actually mean it this time
     </p>
@@ -1256,16 +1253,22 @@
     }
 
     // Response handlers
-    function sendChoice(value) {
-      document.getElementById('choiceInput').value = value;
-      document.getElementById('choiceForm').submit();
-      
+    function forgiven() {
       playSound('success');
       createConfetti();
-      
-      setTimeout(() => {
-        goTo(9);
-      }, 500);
+      setTimeout(() => goTo(9), 500);
+    }
+
+    function progress() {
+      playSound('success');
+      createConfetti();
+      setTimeout(() => goTo(9), 500);
+    }
+
+    function tryHarder() {
+      alert("Challenge accepted! I'll try harder next time. 💪");
+      playSound('beep');
+      setTimeout(() => goTo(9), 500);
     }
 
     // Celebration
