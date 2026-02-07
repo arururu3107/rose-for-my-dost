@@ -1260,26 +1260,31 @@ function sendChoice(value) {
         }, i * 30);
       }
     }
+<script>
+  // Initialize
+  createParticles();
 
-    // Initialize
-    createParticles();
+  // Auto-trigger animations when reaching certain screens
+  const observer = new MutationObserver(() => {
+    if (!document.getElementById('screen4').classList.contains('hidden')) {
+      setTimeout(animateTerminal, 500);
+    }
+    if (!document.getElementById('screen5').classList.contains('hidden')) {
+      setTimeout(startCountdown, 500);
+    }
+  });
 
-    // Auto-trigger animations when reaching certain screens
-    const observer = new MutationObserver(() => {
-      if (!document.getElementById('screen4').classList.contains('hidden')) {
-        setTimeout(animateTerminal, 500);
-      }
-      if (!document.getElementById('screen5').classList.contains('hidden')) {
-        setTimeout(startCountdown, 500);
-      }
-    });
+  observer.observe(document.body, {
+    attributes: true,
+    subtree: true,
+    attributeFilter: ['class']
+  });
 
-    observer.observe(document.body, {
-      attributes: true,
-      subtree: true,
-      attributeFilter: ['class']
-    });
-  </script>
+  // 🔥 FORCE FIRST SCREEN TO SHOW (CRITICAL FIX)
+  document.addEventListener("DOMContentLoaded", () => {
+    goTo(1);
+  });
+</script>
 
 </body>
 </html>
