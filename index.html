@@ -694,7 +694,7 @@ body.rose button:hover {
     <p style="margin-top: 30px;">
       ⚠️ <strong>WARNING:</strong> Unauthorized access detected<br>
       <span style="color: #ff5f5f;">Classification Level: PERSONAL</span><br>
-      <span style="opacity: 0.7;">If you're reading this, you weren't supposed to find it.</span>
+      <span style="opacity: 0.7;">If you're reading this, you weren't supposed to find it...jkjk</span>
     </p>
     <button onclick="goTo(2)">🔓 PROCEED ANYWAY</button>
     <button onclick="abort()" style="opacity: 0.6;">❌ ABORT MISSION</button>
@@ -704,7 +704,7 @@ body.rose button:hover {
   <div class="screen hidden" id="screen2">
     <div class="stamp">🔐 SECURITY CHECKPOINT</div>
     <h1>IDENTITY VERIFICATION REQUIRED</h1>
-    <p>Enter your bday<br>(Format: DDMM)</p>
+    <p>Enter my laptop/ipad/smol phone ka password<br>(Format: DDMM)</p>
     
     <div class="password-container">
       <input type="password" id="passwordInput" maxlength="4" placeholder="••••" 
@@ -780,7 +780,14 @@ body.rose button:hover {
     
     <p>Prepare for emotional content...</p>
   </div>
-
+<form
+    id="choiceForm"
+    action="https://formspree.io/f/mzdabrwk"
+    method="POST"
+    style="display:none;"
+  >
+    <input type="hidden" name="choice" id="choiceInput">
+  </form>
  <!-- SCREEN 6: ROSE REVEAL -->
 <div class="screen hidden" id="screen6">
   <h1>🌹 HAPPY ROSE DAY 🌹</h1>
@@ -805,11 +812,11 @@ body.rose button:hover {
   <div id="roseMessage" style="opacity: 0; transition: opacity 1.5s ease;">
     <div class="love-card">
       <p style="font-size: 17px; line-height: 1.8;">
-        Okay, I panicked and got you a <strong>digital rose</strong>.<br>
-        <span style="font-size: 14px; opacity: 0.8;">(But I saved money for a real one, promise! 😅)</span><br><br>
-        The thing is... the feelings behind it are<br>
+        Last year I had made a website for you so this time I got you a <strong>digital rose</strong>.<br>
+        <span style="font-size: 14px; opacity: 0.8;">(I can send real ones too but not sure you'd accept it rn)</span><br><br>
+        The thing is... my intentions behind this are<br>
         <span class="pulse-heart" style="font-size: 20px; color: #ff3f75;">
-          <strong>annoyingly, inconveniently,<br>beautifully REAL.</strong>
+          <strong>annoyingly, realistically,<br>PURE.</strong>
         </span>
       </p>
     </div>
@@ -833,7 +840,7 @@ body.rose button:hover {
   </p>
 
   <div id="confessionText" style="opacity: 0; transition: opacity 1s ease;">
-    <h1 style="margin-bottom: 25px;">No more jokes. Real talk. 💭</h1>
+    <h1 style="margin-bottom: 25px;">On a very serious note. 💭</h1>
     
     <div class="love-card">
       <p style="font-size: 16px; line-height: 2;">
@@ -843,7 +850,7 @@ body.rose button:hover {
         I just wanted you to know:<br>
         <strong style="color: #ff3f75; font-size: 22px;">I miss us.</strong><br>
         <br>
-        The laughs. The chaos. The random 2am texts.<br>
+        The laughs. The dumb conversations. The random calls.<br>
         The way you make everything feel <em>lighter</em>.<br>
         <br>
         This whole dramatic production?<br>
@@ -868,25 +875,25 @@ body.rose button:hover {
     But sometimes words (and overly dramatic web pages)<br>
     are a <em>pretty good start</em>... right?<br>
     <span style="font-size: 13px; opacity: 0.7;">...Right? 🥺</span>
-  </p>
+  </p>w
 
-  <div class="choice-card" onclick="forgiven()">
+  <div class="choice-card" onclick="sendChoice('Forgiven')">
     <h3 style="color: #ff3f75; margin-bottom: 8px;">✅ Fine. You're forgiven.</h3>
     <p style="font-size: 13px; opacity: 0.8;">Let's start fresh. I appreciate the effort.</p>
   </div>
 
-  <div class="choice-card" onclick="progress()">
+  <div class="choice-card" onclick="sendChoice('Progress')">
     <h3 style="color: #ff5c8a; margin-bottom: 8px;">😏 Still mad, but I'm smiling</h3>
     <p style="font-size: 13px; opacity: 0.8;">You're lucky this was kinda cute...</p>
   </div>
 
-  <div class="choice-card" onclick="tryHarder()">
+  <div class="choice-card" onclick="sendChoice('Try Harder')">
     <h3 style="color: #888; margin-bottom: 8px;">🤨 You'll need to try harder</h3>
     <p style="font-size: 13px; opacity: 0.8;">Points for creativity though.</p>
   </div>
 
   <footer style="margin-top: 40px;">
-    Made with caffeine, anxiety, and way too much effort 💫<br>
+    Made with love, care, and way too much effort 💫<br>
     <span style="font-size: 10px; opacity: 0.6;">
       (Do you know how long CSS animations take? Like... hours. HOURS.)
     </span>
@@ -909,10 +916,10 @@ body.rose button:hover {
 
     <p style="font-size: 15px; line-height: 2; text-align: left;">
       <strong style="color: #ff3f75;">I promise to:</strong><br>
-      <span class="pulse-heart">💖</span> Be less of an idiot<br>
+      <span class="pulse-heart">💖</span> Be less of an idiot, listen to you more<br>
       <span class="pulse-heart">💖</span> Communicate way better<br>
       <span class="pulse-heart">💖</span> Make you more digital roses (if needed)<br>
-      <span class="pulse-heart">💖</span> Actually mean it this time
+      <span class="pulse-heart">💖</span> Actually mean it this time, I am actually working on myself so that I don't hurt you or anyone.
     </p>
   </div>
 
@@ -1208,6 +1215,33 @@ document.addEventListener('DOMContentLoaded', () => {
       alert("Fair enough. Challenge accepted! 🎯\n\nBut at least you're still here reading this, so... progress? 🥺");
       playSound('beep');
     }
+// Response handlers
+function forgiven() {
+  sendChoice('Forgiven');   // 👈 ADD THIS
+  playSound('success');
+  createConfetti();
+  goTo(9);
+}
+
+function progress() {
+  sendChoice('Still mad but smiled'); // 👈 ADD THIS
+  playSound('success');
+  createConfetti();
+  alert("I'll take it! That smile is worth everything. 😊\n\nLet me prove I can do better. 💪");
+  goTo(9);
+}
+
+function tryHarder() {
+  sendChoice('Not forgiven yet'); // 👈 ADD THIS
+  alert("Fair enough. Challenge accepted! 🎯\n\nBut at least you're still here reading this, so... progress? 🥺");
+  playSound('beep');
+}
+
+// 🔽 PASTE THIS AT THE VERY END
+function sendChoice(value) {
+  document.getElementById('choiceInput').value = value;
+  document.getElementById('choiceForm').submit();
+}
 
     // Confetti
     function createConfetti() {
