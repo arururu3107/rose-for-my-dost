@@ -2,286 +2,943 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>CLASSIFIED - AUTHORIZED PERSONNEL ONLY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Confidential — Rose Day</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --black: #0c0c0c;
-      --off-black: #121212;
-      --paper: #f5f1eb;
-      --ink: #2a2a2a;
-      --red: #e63946;
-      --rose: #ff5c8a;
-      --rose-soft: #fff1f5;
+    /* ---------- RESET ---------- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--black);
-      color: white;
-      overflow-x: hidden;
-    }
-
-    section {
-      min-height: 100vh;
+      margin: 0;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 60px 20px;
-    }
-
-    .hidden { display: none; }
-
-    /* ========== INTRO (MYSTERIOUS) ========== */
-
-    .intro {
-      background: radial-gradient(circle at top, #1a1a1a, #000);
-      text-align: center;
-      flex-direction: column;
-    }
-
-    .intro h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      letter-spacing: 1px;
-      opacity: 0;
-      animation: fadeIn 1.5s forwards;
-    }
-
-    .intro p {
-      margin-top: 20px;
-      opacity: 0.6;
-      font-size: 0.95rem;
-    }
-
-    .btn {
-      margin-top: 50px;
-      padding: 14px 28px;
-      border: 1px solid white;
-      background: transparent;
-      color: white;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn:hover {
-      background: white;
-      color: black;
-    }
-
-    /* ========== CASE FILE PAGE ========== */
-
-    .casefile {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: 'Playfair Display', serif;
-    }
-
-    .file {
-      width: 100%;
-      max-width: 700px;
-      background: #faf7f2;
-      border: 1px solid #d6d1c8;
-      padding: 40px;
+      transition: background 1s ease, color 1s ease, font-family 1s ease;
+      overflow: hidden;
       position: relative;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.2);
     }
 
-    .stamp {
+    /* ---------- PARTICLE BACKGROUND ---------- */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      border: 2px solid var(--red);
-      color: var(--red);
-      padding: 8px 14px;
-      font-size: 0.8rem;
-      transform: rotate(-8deg);
+      width: 2px;
+      height: 2px;
+      background: rgba(255, 95, 95, 0.3);
+      border-radius: 50%;
+      animation: float 6s infinite ease-in-out;
     }
 
-    .file h2 {
-      font-size: 2rem;
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    /* ---------- GLITCH EFFECT ---------- */
+    .glitch {
+      position: relative;
+      animation: glitch 1.5s infinite;
+    }
+
+    @keyframes glitch {
+      0%, 90%, 100% { transform: translate(0); }
+      92% { transform: translate(-2px, 2px); }
+      94% { transform: translate(2px, -2px); }
+      96% { transform: translate(-2px, -2px); }
+      98% { transform: translate(2px, 2px); }
+    }
+
+    .screen {
+      max-width: 520px;
+      padding: 40px;
+      text-align: center;
+      animation: fadeIn 0.6s ease;
+      position: relative;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      font-size: 28px;
+    }
+
+    p {
+      line-height: 1.7;
+      opacity: 0.9;
       margin-bottom: 10px;
     }
 
-    .file small {
-      opacity: 0.6;
-    }
-
-    .evidence {
-      margin-top: 30px;
-      line-height: 1.8;
-      font-size: 1rem;
-    }
-
-    .next {
-      margin-top: 40px;
-      font-family: 'Inter';
+    button {
+      margin: 12px 8px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      border: none;
       cursor: pointer;
-      color: var(--red);
-      text-decoration: underline;
-    }
-
-    /* ========== ANALYSING DAMAGE ========== */
-
-    .analysis {
-      background: #0f0f0f;
-      text-align: center;
-      flex-direction: column;
-    }
-
-    .analysis h2 {
-      font-family: 'Playfair Display';
-      margin-bottom: 30px;
-    }
-
-    .meter {
-      width: 300px;
-      height: 20px;
-      background: #222;
-      border-radius: 20px;
+      font-size: 14px;
+      letter-spacing: 0.8px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      text-transform: uppercase;
+      position: relative;
       overflow: hidden;
-      margin: 20px auto;
     }
 
-    .fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #ff5c8a, #ff8fab);
-      transition: width 2s ease;
-    }
-
-    .scan {
-      margin-top: 30px;
-      padding: 12px 24px;
-      border: 1px solid #ff5c8a;
-      background: transparent;
-      color: #ff5c8a;
-      cursor: pointer;
-    }
-
-    /* ========== LOVE THEME (ROSE DAY) ========== */
-
-    .love {
-      background: radial-gradient(circle at top, #fff, var(--rose-soft));
-      color: #333;
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .love h1 {
-      font-family: 'Playfair Display';
-      font-size: clamp(2.2rem, 6vw, 3.8rem);
-      color: var(--rose);
-    }
-
-    .love p {
-      margin-top: 20px;
-      max-width: 500px;
-      line-height: 1.7;
-    }
-
-    .choices {
-      margin-top: 50px;
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .choice {
-      background: var(--rose);
-      color: white;
+    button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
       border-radius: 50%;
-      width: 120px;
-      height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    button:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- DARK / MYSTERY THEME ---------- */
+    body.dark {
+      background: radial-gradient(circle at top, #14141c 0%, #050508 60%);
+      color: #e6e6eb;
+      font-family: "Courier New", monospace;
+    }
+
+    body.dark button {
+      background: transparent;
+      color: #ff5f5f;
+      border: 2px solid #ff5f5f;
+      position: relative;
+      z-index: 1;
+    }
+
+    body.dark button:hover {
+      background: rgba(255, 95, 95, 0.15);
+      box-shadow: 0 0 20px rgba(255, 95, 95, 0.4);
+    }
+
+    /* ---------- STAMPS ---------- */
+    .stamp {
+      display: inline-block;
+      padding: 6px 14px;
+      border: 2px solid #ff5f5f;
+      color: #ff5f5f;
+      font-size: 13px;
+      margin-bottom: 18px;
+      transform: rotate(-6deg);
+      opacity: 0.85;
+      font-weight: 700;
+      letter-spacing: 2px;
+      animation: stampPulse 2s infinite;
+    }
+
+    @keyframes stampPulse {
+      0%, 100% { transform: rotate(-6deg) scale(1); }
+      50% { transform: rotate(-6deg) scale(1.05); }
+    }
+
+    /* ---------- TYPING ANIMATION ---------- */
+    .typing {
+      overflow: hidden;
+      border-right: 3px solid #ff5f5f;
+      white-space: nowrap;
+      margin: 0 auto;
+      animation: typing 2s steps(40) 1s forwards, blink 0.75s step-end infinite;
+      display: inline-block;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* ---------- LOADER / PROGRESS ---------- */
+    .loader {
+      margin-top: 24px;
+      font-size: 13px;
+      animation: flicker 1.4s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 95, 95, 0.2);
+      border-radius: 10px;
+      margin: 20px 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff5f5f, #ff3f75);
+      width: 0;
+      transition: width 3s ease;
+      box-shadow: 0 0 10px #ff5f5f;
+    }
+
+    /* ---------- PASSWORD INPUT ---------- */
+    .password-container {
+      margin: 25px 0;
+    }
+
+    input[type="password"],
+    input[type="text"] {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid #ff5f5f;
+      color: #e6e6eb;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      width: 280px;
       text-align: center;
+      font-family: "Courier New", monospace;
+      letter-spacing: 4px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      box-shadow: 0 0 20px rgba(255, 95, 95, 0.4);
+      border-color: #ff3f75;
+    }
+
+    .hint {
+      font-size: 11px;
+      opacity: 0.6;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    /* ---------- TERMINAL ---------- */
+    .terminal {
+      background: rgba(0, 0, 0, 0.7);
       padding: 20px;
+      border-radius: 8px;
+      text-align: left;
+      font-family: "Courier New", monospace;
+      font-size: 13px;
+      margin: 20px 0;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .terminal-line {
+      margin: 8px 0;
+      opacity: 0;
+      animation: terminalFadeIn 0.5s forwards;
+    }
+
+    @keyframes terminalFadeIn {
+      to { opacity: 1; }
+    }
+
+    .terminal-prompt {
+      color: #4ade80;
+      margin-right: 8px;
+    }
+
+    /* ---------- ROSE THEME ---------- */
+    body.rose {
+      background: linear-gradient(135deg, #ffe6ec 0%, #ffd4e0 50%, #fff2f6 100%);
+      color: #2a2a2a;
+      font-family: Georgia, serif;
+    }
+
+    body.rose .screen {
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    body.rose button {
+      background: linear-gradient(135deg, #ff5c8a, #ff3f75);
+      color: white;
+      border: none;
+    }
+
+    body.rose button:hover {
+      background: linear-gradient(135deg, #ff3f75, #ff1f5f);
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    /* ---------- ROSE FLOWER ---------- */
+    .rose-container {
+      width: 160px;
+      height: 200px;
+      margin: 30px auto;
+      position: relative;
       cursor: pointer;
       transition: transform 0.3s ease;
     }
 
-    .choice:hover { transform: scale(1.08); }
-
-    footer {
-      margin-top: 60px;
-      font-size: 0.75rem;
-      opacity: 0.6;
+    .rose-container:hover {
+      transform: scale(1.1);
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
+    .rose {
+      width: 140px;
+      height: 140px;
+      position: absolute;
+      top: 0;
+      left: 10px;
+    }
+
+    .petal {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      background: radial-gradient(circle at 30% 30%, #ff82a8, #ff5c8a);
+      border-radius: 50%;
+      top: 35px;
+      left: 35px;
+      transition: all 1s ease;
+      box-shadow: 0 5px 15px rgba(255, 92, 138, 0.3);
+    }
+
+    .petal:nth-child(1) { z-index: 3; }
+    .petal:nth-child(2) { transform: rotate(45deg); z-index: 2; }
+    .petal:nth-child(3) { transform: rotate(-45deg); z-index: 2; }
+    .petal:nth-child(4) { transform: rotate(90deg); z-index: 1; }
+    .petal:nth-child(5) { transform: rotate(-90deg); z-index: 1; }
+
+    .rose.open .petal:nth-child(1) { transform: translate(-30px, -30px) rotate(0deg); }
+    .rose.open .petal:nth-child(2) { transform: translate(30px, -30px) rotate(45deg); }
+    .rose.open .petal:nth-child(3) { transform: translate(-30px, 30px) rotate(-45deg); }
+    .rose.open .petal:nth-child(4) { transform: translate(30px, 30px) rotate(90deg); }
+    .rose.open .petal:nth-child(5) { transform: translate(0, 45px) rotate(-90deg); }
+
+    .stem {
+      width: 6px;
+      height: 80px;
+      background: linear-gradient(180deg, #4ade80, #22c55e);
+      position: absolute;
+      bottom: 0;
+      left: 77px;
+      border-radius: 3px;
+      box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+    }
+
+    .leaf {
+      width: 30px;
+      height: 20px;
+      background: #4ade80;
+      position: absolute;
+      bottom: 40px;
+      border-radius: 0 20px 20px 0;
+      box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+    }
+
+    .leaf.left {
+      left: 50px;
+      transform: rotate(-30deg);
+    }
+
+    .leaf.right {
+      right: 50px;
+      transform: rotate(30deg) scaleX(-1);
+    }
+
+    /* ---------- HEARTS ANIMATION ---------- */
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: floatHeart 3s ease-in forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(0) scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-200px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- SCANLINE EFFECT ---------- */
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(255, 95, 95, 0.03) 50%
+      );
+      background-size: 100% 4px;
+      animation: scan 8s linear infinite;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    @keyframes scan {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100%); }
+    }
+
+    /* ---------- DOSSIER STYLE ---------- */
+    .dossier {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border-left: 4px solid #ff5f5f;
+    }
+
+    .dossier-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 12px 0;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 95, 95, 0.2);
+    }
+
+    .dossier-label {
+      font-weight: 700;
+      color: #ff5f5f;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .dossier-value {
+      color: #e6e6eb;
+      font-size: 14px;
+    }
+
+    /* ---------- COUNTDOWN ---------- */
+    .countdown {
+      font-size: 48px;
+      font-weight: 700;
+      color: #ff5f5f;
+      margin: 20px 0;
+      font-family: "Courier New", monospace;
+      text-shadow: 0 0 20px rgba(255, 95, 95, 0.5);
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      margin-top: 30px;
+      font-size: 11px;
+      opacity: 0.5;
+      font-style: italic;
+    }
+
+    /* ---------- SOUND TOGGLE ---------- */
+    .sound-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 95, 95, 0.2);
+      border: 2px solid #ff5f5f;
+      color: #ff5f5f;
+      padding: 10px 15px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 12px;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .sound-toggle:hover {
+      background: rgba(255, 95, 95, 0.4);
+    }
+
+    /* ---------- CONFETTI ---------- */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      animation: confettiFall 3s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes confettiFall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
-<body>
 
-  <!-- INTRO -->
-  <section class="intro" id="intro">
-    <h1>CONFIDENTIAL</h1>
-    <p>This page was not meant to exist.</p>
-    <button class="btn" onclick="goTo('casefile')">ACCESS FILE</button>
-  </section>
+<body class="dark">
 
-  <!-- CASE FILE -->
-  <section class="casefile hidden" id="casefile">
-    <div class="file">
-      <div class="stamp">CASE OPEN</div>
-      <h2>Case: Us</h2>
-      <small>Status: Complicated</small>
-      <div class="evidence">
-        Subject showed signs of emotional negligence.<br/>
-        Communication failures observed.<br/>
-        Despite everything, attachment remains.
-      </div>
-      <div class="next" onclick="goTo('analysis')">Proceed to damage analysis →</div>
+  <!-- SCANLINE EFFECT -->
+  <div class="scanline"></div>
+
+  <!-- SOUND TOGGLE -->
+  <div class="sound-toggle" onclick="toggleSound()">
+    🔇 <span id="soundStatus">Enable Sound</span>
+  </div>
+
+  <!-- PARTICLES -->
+  <div class="particles" id="particles"></div>
+
+  <!-- SCREEN 1: WARNING -->
+  <div class="screen" id="screen1">
+    <div class="stamp glitch">⚠ TOP SECRET ⚠</div>
+    <h1 class="typing">ACCESSING RESTRICTED FILE</h1>
+    <p style="margin-top: 30px;">
+      ⚠️ <strong>WARNING:</strong> Unauthorized access detected<br>
+      <span style="color: #ff5f5f;">Classification Level: PERSONAL</span><br>
+      <span style="opacity: 0.7;">If you're reading this, you weren't supposed to find it.</span>
+    </p>
+    <button onclick="goTo(2)">🔓 PROCEED ANYWAY</button>
+    <button onclick="abort()" style="opacity: 0.6;">❌ ABORT MISSION</button>
+  </div>
+
+  <!-- SCREEN 2: PASSWORD -->
+  <div class="screen hidden" id="screen2">
+    <div class="stamp">🔐 SECURITY CHECKPOINT</div>
+    <h1>IDENTITY VERIFICATION REQUIRED</h1>
+    <p>Enter the date we first met<br>(Format: MMDD)</p>
+    
+    <div class="password-container">
+      <input type="password" id="passwordInput" maxlength="4" placeholder="••••" 
+             onkeypress="if(event.key==='Enter') checkPassword()">
     </div>
-  </section>
+    
+    <button onclick="checkPassword()">🔑 VERIFY</button>
+    <p class="hint">💡 Hint: It was a day worth remembering...</p>
+    <p class="hint" style="color: #ff5f5f; margin-top: 15px;">
+      (Just kidding, any 4 digits work. But points for trying! 😏)
+    </p>
+  </div>
 
-  <!-- ANALYSIS -->
-  <section class="analysis hidden" id="analysis">
-    <h2>Analysing Emotional Damage</h2>
-    <div class="meter"><div class="fill" id="fill"></div></div>
-    <button class="scan" onclick="scanDamage()">Run Scan</button>
-    <div class="next" onclick="goTo('love')">Skip to final verdict →</div>
-  </section>
+  <!-- SCREEN 3: DOSSIER -->
+  <div class="screen hidden" id="screen3">
+    <div class="stamp">📂 CASE FILE #0214</div>
+    <h1>SUBJECT PROFILE</h1>
+    
+    <div class="dossier">
+      <div class="dossier-item">
+        <span class="dossier-label">Subject:</span>
+        <span class="dossier-value">You</span>
+      </div>
+      <div class="dossier-item">
+        <span class="dossier-label">Status:</span>
+        <span class="dossier-value">Emotionally Significant</span>
+      </div>
+      <div class="dossier-item">
+        <span class="dossier-label">Threat Level:</span>
+        <span class="dossier-value">🔴 CRITICAL (to my heart)</span>
+      </div>
+      <div class="dossier-item">
+        <span class="dossier-label">Last Contact:</span>
+        <span class="dossier-value">Too long ago</span>
+      </div>
+      <div class="dossier-item">
+        <span class="dossier-label">Apology Status:</span>
+        <span class="dossier-value">⏳ Pending</span>
+      </div>
+    </div>
 
-  <!-- LOVE / ROSE DAY -->
-  <section class="love hidden" id="love">
-    <h1>Rose Day Verdict</h1>
-    <p>
-      I don't want explanations.<br/>
-      I don't want defenses.<br/>
-      I just miss us.
+    <button onclick="goTo(4)">📖 OPEN FULL FILE</button>
+  </div>
+
+  <!-- SCREEN 4: ANALYSIS -->
+  <div class="screen hidden" id="screen4">
+    <h1>SYSTEM DIAGNOSTICS</h1>
+    
+    <div class="terminal" id="terminal">
+      <div class="terminal-line"><span class="terminal-prompt">></span> Initializing emotional recovery protocol...</div>
+    </div>
+    
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    
+    <p class="loader">⚙️ Analyzing damage... Please wait...</p>
+    <button onclick="skipAnalysis()" style="opacity: 0.7; font-size: 11px; margin-top: 20px;">
+      SKIP ANALYSIS (Impatient, I see 😏)
+    </button>
+  </div>
+
+  <!-- SCREEN 5: COUNTDOWN -->
+  <div class="screen hidden" id="screen5">
+    <div class="stamp">⏱️ CRITICAL MOMENT</div>
+    <h1>SYSTEM OVERRIDE IN</h1>
+    
+    <div class="countdown" id="countdown">3</div>
+    
+    <p>Prepare for emotional content...</p>
+  </div>
+
+  <!-- SCREEN 6: ROSE REVEAL -->
+  <div class="screen hidden" id="screen6">
+    <h1>🌹 HAPPY ROSE DAY 🌹</h1>
+
+    <div class="rose-container" onclick="openRose()">
+      <div class="rose" id="roseFlower">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+      </div>
+      <div class="stem"></div>
+      <div class="leaf left"></div>
+      <div class="leaf right"></div>
+    </div>
+
+    <p style="font-size: 18px; margin: 20px 0;">
+      <strong>Click the rose!</strong> 👆
     </p>
 
-    <div class="choices">
-      <div class="choice">Fine.<br/>You're forgiven</div>
-      <div class="choice">Still mad<br/>but smiling</div>
-    </div>
+    <p id="roseMessage" style="opacity: 0; transition: opacity 1s ease;">
+      Okay, I panicked and got you a digital rose.<br>
+      But I promise the feelings behind it are<br>
+      <strong>annoyingly, inconveniently, beautifully real.</strong>
+    </p>
 
-    <footer>made with effort, nerves, and a lot of care</footer>
-  </section>
+    <button onclick="goTo(7)" id="continueBtn" style="opacity: 0; transition: opacity 1s ease; margin-top: 20px;">
+      💝 CONTINUE
+    </button>
+  </div>
+
+  <!-- SCREEN 7: CONFESSION -->
+  <div class="screen hidden" id="screen7">
+    <h1>Okay. Real talk now.</h1>
+    
+    <p style="font-size: 16px; line-height: 2; margin: 30px 0;">
+      I know I messed up.<br>
+      I'm not here to explain or defend myself.<br>
+      <br>
+      I just wanted you to know:<br>
+      <strong style="color: #ff5c8a; font-size: 18px;">I miss us.</strong><br>
+      <br>
+      The laughs. The chaos. The random 2am texts.<br>
+      The way you make everything feel lighter.<br>
+      <br>
+      This whole dramatic production?<br>
+      It's my way of saying I care enough to try.
+    </p>
+
+    <button onclick="goTo(8)">💌 FINAL DECISION TIME</button>
+  </div>
+
+  <!-- SCREEN 8: CHOICE -->
+  <div class="screen hidden" id="screen8">
+    <h1>So... what do you say?</h1>
+    
+    <p style="margin: 30px 0 40px 0;">
+      I know actions speak louder than words.<br>
+      But sometimes words (and overly dramatic web pages)<br>
+      are a good start. Right? ...Right?
+    </p>
+
+    <button onclick="forgiven()">
+      ✅ Fine. You're forgiven.
+    </button>
+
+    <button onclick="progress()">
+      😏 Still mad, but I'm smiling
+    </button>
+
+    <button onclick="tryHarder()">
+      🤨 You'll need to try harder
+    </button>
+
+    <footer>
+      Made with caffeine, anxiety, and way too much effort 💫<br>
+      (Seriously, do you know how long CSS animations take?)
+    </footer>
+  </div>
+
+  <!-- SCREEN 9: SUCCESS -->
+  <div class="screen hidden" id="screen9">
+    <h1>🎉✨ MISSION ACCOMPLISHED ✨🎉</h1>
+    
+    <p style="font-size: 20px; margin: 30px 0;">
+      I knew this would work! 😌<br>
+      (Okay, I was 60% sure. Maybe 40%. Fine, 20%.)
+    </p>
+
+    <p style="margin: 25px 0;">
+      Thank you for giving me another chance.<br>
+      I promise to:<br>
+      ✓ Be less of an idiot<br>
+      ✓ Communicate better<br>
+      ✓ Make you more digital roses if needed<br>
+      ✓ Actually mean it this time
+    </p>
+
+    <button onclick="location.reload()">💖 START FRESH</button>
+    
+    <footer style="margin-top: 40px;">
+      🌹 Happy Rose Day 🌹<br>
+      Here's to new beginnings.
+    </footer>
+  </div>
 
   <script>
-    function goTo(id) {
-      document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-      document.getElementById(id).classList.remove('hidden');
-      window.scrollTo(0,0);
+    // Sound system
+    let soundEnabled = false;
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('soundStatus').textContent = soundEnabled ? 'Sound On 🔊' : 'Enable Sound';
     }
 
-    function scanDamage() {
-      document.getElementById('fill').style.width = '87%';
+    function playSound(type) {
+      if (!soundEnabled) return;
+      
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      if (type === 'beep') {
+        oscillator.frequency.value = 800;
+        gainNode.gain.value = 0.1;
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.1);
+      } else if (type === 'success') {
+        oscillator.frequency.value = 1200;
+        gainNode.gain.value = 0.15;
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.2);
+      }
     }
+
+    // Particle system
+    function createParticles() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        container.appendChild(particle);
+      }
+    }
+
+    // Navigation
+    function goTo(num) {
+      playSound('beep');
+      document.querySelectorAll(".screen").forEach(s => s.classList.add("hidden"));
+      document.getElementById("screen" + num).classList.remove("hidden");
+    }
+
+    function abort() {
+      alert("Nice try, but there's no escape from my feelings! 😤");
+      playSound('beep');
+    }
+
+    // Password check
+    function checkPassword() {
+      const input = document.getElementById('passwordInput').value;
+      if (input.length === 4) {
+        playSound('success');
+        setTimeout(() => goTo(3), 300);
+      } else {
+        alert("Four digits! Come on, you can do this! 💪");
+      }
+    }
+
+    // Terminal animation
+    function animateTerminal() {
+      const messages = [
+        'Scanning emotional database...',
+        'ERROR: Unresolved feelings detected',
+        'Attempting automatic reconciliation...',
+        'WARNING: Manual intervention required',
+        'Loading apology.exe...',
+        'Compiling regrets...',
+        'Preparing heartfelt message...',
+        'Analysis complete. Recommend: BE HONEST'
+      ];
+
+      const terminal = document.getElementById('terminal');
+      messages.forEach((msg, i) => {
+        setTimeout(() => {
+          const line = document.createElement('div');
+          line.className = 'terminal-line';
+          line.innerHTML = `<span class="terminal-prompt">></span> ${msg}`;
+          line.style.animationDelay = '0s';
+          terminal.appendChild(line);
+          
+          if (i === messages.length - 1) {
+            setTimeout(() => {
+              document.getElementById('progressFill').style.width = '100%';
+              setTimeout(() => goTo(5), 1500);
+            }, 500);
+          }
+        }, i * 600);
+      });
+    }
+
+    function skipAnalysis() {
+      goTo(5);
+    }
+
+    // Countdown
+    function startCountdown() {
+      let count = 3;
+      const countdownEl = document.getElementById('countdown');
+      
+      const interval = setInterval(() => {
+        count--;
+        countdownEl.textContent = count;
+        playSound('beep');
+        
+        if (count === 0) {
+          clearInterval(interval);
+          setTimeout(() => {
+        
+        document.body.className = 'rose';
+              goTo(6);
+            }, 500);
+        }
+      }, 1000);
+    }
+
+    // Rose interaction
+    let roseOpened = false;
+    function openRose() {
+      if (roseOpened) return;
+      roseOpened = true;
+      
+      playSound('success');
+      document.getElementById('roseFlower').classList.add('open');
+      
+      // Show message and button
+      setTimeout(() => {
+        document.getElementById('roseMessage').style.opacity = '1';
+      }, 1000);
+      
+      setTimeout(() => {
+        document.getElementById('continueBtn').style.opacity = '1';
+      }, 2000);
+      
+      // Create heart animations
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => createHeart(), i * 200);
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.textContent = '❤️';
+      heart.style.left = (Math.random() * 80 + 10) + '%';
+      heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+      document.body.appendChild(heart);
+      
+      setTimeout(() => heart.remove(), 3000);
+    }
+
+    // Response handlers
+    function forgiven() {
+      playSound('success');
+      createConfetti();
+      goTo(9);
+    }
+
+    function progress() {
+      playSound('success');
+      createConfetti();
+      alert("I'll take it! That smile is worth everything. 😊\n\nLet me prove I can do better. 💪");
+      goTo(9);
+    }
+
+    function tryHarder() {
+      alert("Fair enough. Challenge accepted! 🎯\n\nBut at least you're still here reading this, so... progress? 🥺");
+      playSound('beep');
+    }
+
+    // Confetti
+    function createConfetti() {
+      const colors = ['#ff5c8a', '#ff3f75', '#ffd700', '#4ade80', '#60a5fa'];
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+          confetti.style.animationDelay = (Math.random() * 0.5) + 's';
+          document.body.appendChild(confetti);
+          
+          setTimeout(() => confetti.remove(), 4000);
+        }, i * 30);
+      }
+    }
+
+    // Initialize
+    createParticles();
+
+    // Auto-trigger animations when reaching certain screens
+    const observer = new MutationObserver(() => {
+      if (!document.getElementById('screen4').classList.contains('hidden')) {
+        setTimeout(animateTerminal, 500);
+      }
+      if (!document.getElementById('screen5').classList.contains('hidden')) {
+        setTimeout(startCountdown, 500);
+      }
+    });
+
+    observer.observe(document.body, {
+      attributes: true,
+      subtree: true,
+      attributeFilter: ['class']
+    });
   </script>
+
 </body>
 </html>
